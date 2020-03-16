@@ -10,6 +10,8 @@ import { ExplorarComponent } from './explorar/explorar.component';
 import { LibrosComponent } from './libros/libros.component';
 import { NotificacionesComponent } from './notificaciones/notificaciones.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import {HttpClientModule} from '@angular/common/http';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch: 'full'},
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path: 'explorar', component: ExplorarComponent},
   {path: 'libros', component: LibrosComponent},
   {path: 'notificaciones', component: NotificacionesComponent},
-  {path: 'perfil', component: PerfilComponent}
+  {path: 'perfil', component: PerfilComponent},
+  {path: 'usuarios', component: UsuariosComponent}
 ]
 
 @NgModule({
@@ -29,10 +32,12 @@ const routes: Routes = [
     ExplorarComponent,
     LibrosComponent,
     NotificacionesComponent,
-    PerfilComponent
+    PerfilComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
