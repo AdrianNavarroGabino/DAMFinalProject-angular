@@ -1,1 +1,31 @@
-<p>libros works!</p>
+<div class="card border-primary mb-3">
+  <div class="card-header">Libros</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de libros</h5>
+
+    <table class="table table-bordered table-striped table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">título</th>
+          <th scope="col">isbn10</th>
+          <th scope="col">isbn13</th>
+          <th scope="col">editorial</th>
+          <th scope="col">fecha de publicación</th>
+          <th scope="col">autor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of libros">
+          <th scope="row">{{libro.id}}</th>
+          <td style ="word-break:break-all;">{{libro.titulo}}</td>
+          <td>{{libro.isbn10}}</td>
+          <td>{{libro.isbn13}}</td>
+          <td style ="word-break:break-all;">{{libro.editorial}}</td>
+          <td>{{libro.fechaPublicacion}}</td>
+          <td><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
