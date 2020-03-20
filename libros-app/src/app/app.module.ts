@@ -12,6 +12,8 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
 import { PerfilComponent } from './perfil/perfil.component';
 import {HttpClientModule} from '@angular/common/http';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { FormComponent } from './libros/form.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch: 'full'},
@@ -20,7 +22,8 @@ const routes: Routes = [
   {path: 'libros', component: LibrosComponent},
   {path: 'notificaciones', component: NotificacionesComponent},
   {path: 'perfil', component: PerfilComponent},
-  {path: 'usuarios', component: UsuariosComponent}
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'libros/form', component: FormComponent}
 ]
 
 @NgModule({
@@ -33,11 +36,13 @@ const routes: Routes = [
     LibrosComponent,
     NotificacionesComponent,
     PerfilComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

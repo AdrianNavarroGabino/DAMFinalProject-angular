@@ -1,0 +1,47 @@
+<div class="card bg-dark text-white my-5">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "create()">
+      <div class="form-group row">
+        <label for="titulo" class="col-form-label col-sm-2">Título</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="libro.titulo" name="titulo">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="isbn10" class="col-form-label col-sm-2">ISBN 10</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="libro.isbn10" name="isbn10">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="isbn13" class="col-form-label col-sm-2">ISBN13</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="libro.isbn13" name="isbn13">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="editorial" class="col-form-label col-sm-2">Editorial</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="libro.editorial" name="editorial">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fechaPublicacion" class="col-form-label col-sm-2">Fecha de publicación</label>
+        <div class="col-sm-6">
+          <input type="date" class="form-control" [(ngModel)]="libro.fechaPublicacion" name="fechaPublicacion">
+        </div>
+      </div>
+
+      <div class="form-group row mx-1 py-2">
+        <div clas="col-sm-6">
+          <button class="btn btn-primary" role="button">Añadir libro</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
