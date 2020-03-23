@@ -10,10 +10,23 @@ import { LibroService } from './libro.service';
 export class LibrosComponent implements OnInit {
 
   libros: Libro[];
+  adapt: number;
 
   constructor(private libroService: LibroService) { }
 
   ngOnInit(): void {
+    if(window.screen.width > 850)
+    {
+      this.adapt = 0;
+    }
+    else if(window.screen.width > 600)
+    {
+      this.adapt = 1;
+    }
+    else
+    {
+      this.adapt = 2;
+    }
     this.libroService.getLibros().subscribe(
       libros => this.libros = libros
     );
