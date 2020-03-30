@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Libro } from './libro';
-import { of, Observable } from 'rxjs';
+import { of, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,13 @@ export class LibroService {
     );
   }
 
-  create(libro: Libro): Observable<Libro> {
-    return this.http.post<Libro>(this.urlEndPoint, libro, {headers: this.httpHeaders});
+  create(libro: Libro): Observable<any> {
+    return this.http.post<any>(this.urlEndPoint, libro, {headers: this.httpHeaders}).pipe(
+      catchError(e => {
+        console.error(e.error.mensaje);
+        swal.fire('Error al añadir', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 }
