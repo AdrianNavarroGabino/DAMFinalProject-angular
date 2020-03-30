@@ -1,25 +1,40 @@
 <div class="card bg-dark text-white my-5">
-  <div class="card-header">{{ titulo }}</div>
+  <div class="card-header">{{ tituloForm }}</div>
   <div class="card-body">
-    <form (ngSubmit) = "create()">
+    <form (ngSubmit) = "create()" #libroForm="ngForm">
       <div class="form-group row">
         <label for="titulo" class="col-form-label col-sm-2">Título</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.titulo" name="titulo">
+          <input type="text" class="form-control" [(ngModel)]="libro.titulo" name="titulo" required #titulo="ngModel">
+          <div class="alert alert-danger" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+            <div *ngIf="titulo.errors.required">
+              Introduce un título
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="isbn10" class="col-form-label col-sm-2">ISBN 10</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.isbn10" name="isbn10">
+          <input type="text" class="form-control" [(ngModel)]="libro.isbn10" name="isbn10" pattern="(^[0-9]{10}$)|(^[0-9]{1}[- ][0-9]{4}[- ][0-9]{4}[- ][0-9]{1}$)" #isbn10="ngModel">
+          <div class="alert alert-danger" *ngIf="isbn10.invalid && (isbn10.dirty || isbn10.touched)">
+            <div *ngIf="isbn10.errors.pattern">
+              Introduce un ISBN 10 válido
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="isbn13" class="col-form-label col-sm-2">ISBN13</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.isbn13" name="isbn13">
+          <input type="text" class="form-control" [(ngModel)]="libro.isbn13" name="isbn13"  pattern="(^[0-9]{13}$)|(^[0-9]{3}[- ][0-9]{1}[- ][0-9]{2}[- ][0-9]{6}[- ][0-9]{1}$)" #isbn13="ngModel">
+          <div class="alert alert-danger" *ngIf="isbn13.invalid && (isbn13.dirty || isbn13.touched)">
+            <div *ngIf="isbn13.errors.pattern">
+              Introduce un ISBN 13 válido
+            </div>
+          </div>
         </div>
       </div>
 
@@ -39,7 +54,7 @@
 
       <div class="form-group row mx-1 py-2">
         <div clas="col-sm-6">
-          <button class="btn btn-primary" role="button">Añadir libro</button>
+          <button class="btn btn-primary" role="button" [disabled]="!libroForm.form.valid || (libro.isbn10.length == 0 && libro.isbn13.length == 0)">Añadir libro</button>
         </div>
       </div>
     </form>

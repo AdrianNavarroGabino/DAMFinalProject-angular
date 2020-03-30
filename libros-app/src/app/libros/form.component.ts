@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 export class FormComponent implements OnInit {
   public libro: Libro = new Libro();
-  public titulo: String = "Añadir libro";
+  public tituloForm: String = "Añadir libro";
 
   constructor(private libroService: LibroService, private router: Router) { }
 
