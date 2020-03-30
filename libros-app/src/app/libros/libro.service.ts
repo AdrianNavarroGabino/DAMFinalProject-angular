@@ -24,6 +24,12 @@ export class LibroService {
   create(libro: Libro): Observable<any> {
     return this.http.post<any>(this.urlEndPoint, libro, {headers: this.httpHeaders}).pipe(
       catchError(e => {
+
+        if(e.status == 400)
+        {
+          return throwError(e);
+        }
+        
         console.error(e.error.mensaje);
         swal.fire('Error al añadir', e.error.mensaje, 'error');
         return throwError(e);

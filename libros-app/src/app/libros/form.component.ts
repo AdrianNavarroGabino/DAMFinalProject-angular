@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class FormComponent implements OnInit {
   public libro: Libro = new Libro();
   public tituloForm: String = "Añadir libro";
+  private errores: string[];
 
   constructor(private libroService: LibroService, private router: Router) { }
 
@@ -25,6 +26,11 @@ export class FormComponent implements OnInit {
           'Nuevo libro',
           `Libro ${response.libro.titulo} añadido con éxito`,
           'success');
+      },
+      err => {
+       this.errores = err.error.errors as string[];
+       console.error('Código de error desde el backend: ' + err.status);
+       console.error(err.error.errors);
       }
     );
   }
