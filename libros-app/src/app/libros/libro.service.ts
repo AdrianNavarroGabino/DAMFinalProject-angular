@@ -15,9 +15,9 @@ export class LibroService {
 
   constructor(private http: HttpClient) { }
 
-  getLibros(): Observable<Libro[]> {
-    return this.http.get<Libro[]>(this.urlEndPoint).pipe(
-      map(response => response as Libro[])
+  getLibros(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map( (response: any) => response.content)
     );
   }
 
@@ -29,7 +29,7 @@ export class LibroService {
         {
           return throwError(e);
         }
-        
+
         console.error(e.error.mensaje);
         swal.fire('Error al añadir', e.error.mensaje, 'error');
         return throwError(e);

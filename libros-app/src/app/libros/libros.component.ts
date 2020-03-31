@@ -27,7 +27,9 @@ export class LibrosComponent implements OnInit {
     {
       this.adapt = 2;
     }
-    this.libroService.getLibros().subscribe(
+
+    let page = 0;
+    this.libroService.getLibros(page).subscribe(
       libros => this.libros = libros
     );
   }
