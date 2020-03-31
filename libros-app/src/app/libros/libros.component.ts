@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Libro } from './libro';
 import { LibroService } from './libro.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-libros',
@@ -12,7 +13,8 @@ export class LibrosComponent implements OnInit {
   libros: Libro[];
   adapt: number;
 
-  constructor(private libroService: LibroService) { }
+  constructor(private libroService: LibroService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     if(window.screen.width > 850)
@@ -28,10 +30,12 @@ export class LibrosComponent implements OnInit {
       this.adapt = 2;
     }
 
-    let page = 0;
-    this.libroService.getLibros(page).subscribe(
-      libros => this.libros = libros
-    );
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+      this.libroService.getLibros(page).subscribe(
+        libros => this.libros = libros
+      );
+    })
   }
 
 }
