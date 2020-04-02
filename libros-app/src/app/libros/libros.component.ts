@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Libro } from './libro';
 import { LibroService } from './libro.service';
 import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-libros',
@@ -12,6 +13,7 @@ export class LibrosComponent implements OnInit {
 
   libros: Libro[];
   adapt: number;
+  paginador: any;
 
   constructor(private libroService: LibroService,
     private activatedRoute: ActivatedRoute) { }
@@ -32,9 +34,24 @@ export class LibrosComponent implements OnInit {
 
     this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
-      this.libroService.getLibros(page).subscribe(
-        libros => this.libros = libros
-      );
+
+      if(!page)
+      {
+        page = 0;
+      }
+
+      this.libroService.getLibros(page).pipe(
+        tap(response => {
+          console.log('ClientesComponent: Tap 3');
+          (response.content as Libro[]).forEach( libro => {
+            console.log(libro.titulo);
+          });
+        })
+      ).subscribe(response => {
+        this.libros = response.content as Libro[];
+        this.paginador = response;
+        console.log(response.content);
+      });
     })
   }
 

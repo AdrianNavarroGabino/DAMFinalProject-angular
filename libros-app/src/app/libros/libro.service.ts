@@ -16,9 +16,7 @@ export class LibroService {
   constructor(private http: HttpClient) { }
 
   getLibros(page: number): Observable<any> {
-    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
-      map( (response: any) => response.content)
-    );
+    return this.http.get(this.urlEndPoint + '/page/' + page);
   }
 
   create(libro: Libro): Observable<any> {
