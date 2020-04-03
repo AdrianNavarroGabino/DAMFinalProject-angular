@@ -15,6 +15,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { FormComponent } from './libros/form.component';
 import { FormsModule } from '@angular/forms';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { DetalleComponent } from './libros/detalle/detalle.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch: 'full'},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'notificaciones', component: NotificacionesComponent},
   {path: 'perfil', component: PerfilComponent},
   {path: 'usuarios', component: UsuariosComponent},
-  {path: 'libros/form', component: FormComponent}
+  {path: 'libros/form', component: FormComponent},
+  {path: 'libros/ver/:id', component: DetalleComponent}
 ]
 
 @NgModule({
@@ -40,7 +42,8 @@ const routes: Routes = [
     PerfilComponent,
     UsuariosComponent,
     FormComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,

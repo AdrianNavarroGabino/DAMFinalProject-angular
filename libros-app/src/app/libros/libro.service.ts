@@ -13,10 +13,21 @@ export class LibroService {
   private urlEndPoint: string = 'http://localhost:8080/api/libros';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getLibros(page: number): Observable<any> {
     return this.http.get(this.urlEndPoint + '/page/' + page);
+  }
+
+  getLibro(id: number): Observable<Libro> {
+    return this.http.get<Libro>(`${this.urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        this.router.navigate(['/libros']);
+        console.error(e.error.mensaje);
+        swal.fire('Error al editar', e.error.mensaje, 'error');
+        return throwError(e);
+      })
+    );
   }
 
   create(libro: Libro): Observable<any> {

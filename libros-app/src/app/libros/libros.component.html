@@ -7,68 +7,30 @@
       <button class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/libros/form']">Añadir libro</button>
     </div>
 
-    <ng-template [ngIf]="adapt == 0">
-      <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">título</th>
-            <th scope="col">isbn10</th>
-            <th scope="col">isbn13</th>
-            <th scope="col">editorial</th>
-            <th scope="col">fecha de publicación</th>
-            <th scope="col">autor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let libro of libros">
-            <td style ="word-break:break-all;">{{libro.titulo}}</td>
-            <td>{{libro.isbn10}}</td>
-            <td>{{libro.isbn13}}</td>
-            <td style ="word-break:break-all;">{{libro.editorial}}</td>
-            <td>{{libro.fechaPublicacion}}</td>
-            <td><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-template>
+    <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
+      <thead>
+        <tr>
+          <th scope="col" style="width:30%;">título</th>
+          <th scope="col" style="width:10%;">isbn10</th>
+          <th scope="col" style="width:13%;">isbn13</th>
+          <th scope="col" style="width:15%;">editorial</th>
+          <th scope="col" style="width:2%;">fecha de publicación</th>
+          <th scope="col" style="width:30%;">autor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of libros">
+          <td style="width:20px;"><a [routerLink]="['/libros/ver', libro.id]">{{libro.titulo}}</a></td>
+          <td style="width:10%;">{{libro.isbn10}}</td>
+          <td style="width:13%;">{{libro.isbn13}}</td>
+          <td style="width:15%;">{{libro.editorial}}</td>
+          <td style="width:2%;">{{libro.fechaPublicacion}}</td>
+          <td style="width:30%;"><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
+        </tr>
+      </tbody>
+    </table>
 
-    <ng-template [ngIf]="adapt == 1">
-      <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">título</th>
-            <th scope="col">editorial</th>
-            <th scope="col">fecha de publicación</th>
-            <th scope="col">autor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let libro of libros">
-            <td style ="word-break:break-all;">{{libro.titulo}}</td>
-            <td style ="word-break:break-all;">{{libro.editorial}}</td>
-            <td>{{libro.fechaPublicacion}}</td>
-            <td><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-template>
 
-    <ng-template [ngIf]="adapt == 2">
-      <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
-        <thead>
-          <tr>
-            <th scope="col">título</th>
-            <th scope="col">autor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let libro of libros">
-            <td style ="word-break:break-all;">{{libro.titulo}}</td>
-            <td><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-template>
     <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
   </div>
 </div>
