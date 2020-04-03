@@ -2,13 +2,33 @@
   <div class="card-header">{{ titulo }}</div>
 
   <div class="card-body">
-    <div class="input-group">
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-        <label class="custom-file-label" for="inputGroupFile04">Subir foto</label>
-      </div>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm" *ngIf="libro?.foto">
+          <img src="http://localhost:8080/api/uploads/img/{{libro.foto}}" alt="{{libro.foto}}" class="img-thumbnail rounded" />
+        </div>
+
+        <div class="col-sm">
+          <ul class="list-group text-dark mb-3" *ngIf="libro">
+            <li class="list-group-item list-group-item-primary">Título: {{ libro.titulo }}</li>
+            <li *ngIf="libro.autores && libro.autores.length > 0" class="list-group-item list-group-item-secondary">Autor: {{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</li>
+            <li class="list-group-item">ISBN 10: {{ libro.isbn10 }}</li>
+            <li class="list-group-item">ISBN 13: {{ libro.isbn13 }}</li>
+            <li class="list-group-item">Editorial: {{ libro.editorial }}</li>
+            <li class="list-group-item">Fecha de publicación: {{ libro.fechaPublicacion }}</li>
+          </ul>
+
+          <div class="input-group">
+            <div class="custom-file">
+              <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+              <label class="custom-file-label" for="inputGroupFile04">Seleccionar portada</label>
+            </div>
+            <div class="input-group-append">
+              <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

@@ -1,3 +1,5 @@
+import { Autor } from './autor';
+
 export class Libro {
   id: number;
   titulo: string;
@@ -5,5 +7,6 @@ export class Libro {
   isbn13: string;
   editorial: string;
   fechaPublicacion: string;
-  autores: string[];
+  autores: Autor[];
+  foto: string;
 }
