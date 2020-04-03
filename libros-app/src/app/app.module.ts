@@ -26,8 +26,7 @@ const routes: Routes = [
   {path: 'notificaciones', component: NotificacionesComponent},
   {path: 'perfil', component: PerfilComponent},
   {path: 'usuarios', component: UsuariosComponent},
-  {path: 'libros/form', component: FormComponent},
-  {path: 'libros/ver/:id', component: DetalleComponent}
+  {path: 'libros/form', component: FormComponent}
 ]
 
 @NgModule({

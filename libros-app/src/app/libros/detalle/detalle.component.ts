@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Libro } from '../libro';
 import { LibroService } from '../libro.service';
 import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import { HttpEventType } from '@angular/common/http';
+import { ModalService } from './modal.service';
 
 @Component({
   selector: 'detalle-libro',
@@ -10,27 +12,19 @@ import swal from 'sweetalert2';
   styleUrls: ['./detalle.component.css']
 })
 export class DetalleComponent implements OnInit {
-  libro: Libro;
+  @Input() libro: Libro;
   titulo: string = "Detalle del libro";
   fotoSeleccionada: File;
+  progreso: number = 0;
 
-  constructor(private libroService: LibroService,
-    private activatedRoute: ActivatedRoute) { }
+  constructor(private libroService: LibroService, public modalService: ModalService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      let id: number = +params.get('id');
-      if(id)
-      {
-        this.libroService.getLibro(id).subscribe(libro => {
-          this.libro = libro;
-        })
-      }
-    })
   }
 
   seleccionarFoto(event) {
     this.fotoSeleccionada = event.target.files[0];
+    this.progreso = 0;
     console.log(this.fotoSeleccionada);
 
     if(this.fotoSeleccionada.type.indexOf('image') < 0)
@@ -47,13 +41,30 @@ export class DetalleComponent implements OnInit {
     }
     else {
       this.libroService.subirFoto(this.fotoSeleccionada, this.libro.id)
-        .subscribe(libro => {
-          this.libro = libro;
-          swal.fire(
-            'La portada se ha subido correctamente',
-            `La portada se ha subido con éxito: ${this.libro.foto}`,
-            'success');
+        .subscribe(event => {
+          if(event.type === HttpEventType.UploadProgress)
+          {
+            this.progreso = Math.round(event.loaded / event.total * 100);
+          }
+          else if(event.type === HttpEventType.Response)
+          {
+            let response: any = event.body;
+            this.libro = response.libro as Libro;
+
+            this.modalService.notificarUpload.emit(this.libro);
+
+            swal.fire(
+              'La portada se ha subido correctamente',
+              response.mensaje,
+              'success');
+          }
         });
     }
+  }
+
+  cerrarModal() {
+    this.fotoSeleccionada = null;
+    this.progreso = 0;
+    this.modalService.cerrarModal();
   }
 }

@@ -1,3 +1,5 @@
+<detalle-libro *ngIf="libroSeleccionado" [libro]="libroSeleccionado"></detalle-libro>
+
 <div class="card border-primary mb-3">
   <div class="card-header">Libros</div>
   <div class="card-body text-primary">
@@ -10,22 +12,29 @@
     <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
       <thead>
         <tr>
-          <th scope="col" style="width:30%;">título</th>
-          <th scope="col" style="width:10%;">isbn10</th>
-          <th scope="col" style="width:13%;">isbn13</th>
-          <th scope="col" style="width:15%;">editorial</th>
-          <th scope="col" style="width:2%;">fecha de publicación</th>
-          <th scope="col" style="width:30%;">autor</th>
+          <th scope="col" style="width:8%;">Portada</th>
+          <th scope="col" style="width:40%;">Título</th>
+          <th scope="col" style="width:25%;">Autor</th>
+          <th scope="col" style="width:25%;">Editorial</th>
+          <th scope="col" style="width:2%;">Fecha de publicación</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let libro of libros">
-          <td style="width:20px;"><a [routerLink]="['/libros/ver', libro.id]">{{libro.titulo}}</a></td>
-          <td style="width:10%;">{{libro.isbn10}}</td>
-          <td style="width:13%;">{{libro.isbn13}}</td>
-          <td style="width:15%;">{{libro.editorial}}</td>
+          <td style="width:8%;">
+            <img (click)="abrirModal(libro)" *ngIf="libro?.foto"
+            src="http://localhost:8080/api/uploads/img/{{libro.foto}}"
+            alt="{{libro.foto}}" class="img-thumbnail rounded"
+            style="width: 64px; cursor: pointer"/>
+            <img (click)="abrirModal(libro)" *ngIf="!libro?.foto"
+            src="http://localhost:8080/images/no-portada.png"
+            alt="Sin foto" class="img-thumbnail rounded"
+            style="width: 64px; cursor: pointer"/>
+          </td>
+          <td style="width:40px;"><span (click)="abrirModal(libro)" style="cursor: pointer;" class="text-primary">{{libro.titulo}}</span></td>
+          <td style="width:25%;"><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
+          <td style="width:25%;">{{libro.editorial}}</td>
           <td style="width:2%;">{{libro.fechaPublicacion}}</td>
-          <td style="width:30%;"><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
         </tr>
       </tbody>
     </table>

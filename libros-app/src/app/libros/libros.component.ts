@@ -3,6 +3,7 @@ import { Libro } from './libro';
 import { LibroService } from './libro.service';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { ModalService } from './detalle/modal.service';
 
 @Component({
   selector: 'app-libros',
@@ -12,25 +13,14 @@ import { tap } from 'rxjs/operators';
 export class LibrosComponent implements OnInit {
 
   libros: Libro[];
-  adapt: number;
   paginador: any;
+  libroSeleccionado: Libro;
 
   constructor(private libroService: LibroService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private modalService: ModalService) { }
 
   ngOnInit(): void {
-    if(window.screen.width > 850)
-    {
-      this.adapt = 0;
-    }
-    else if(window.screen.width > 600)
-    {
-      this.adapt = 1;
-    }
-    else
-    {
-      this.adapt = 2;
-    }
 
     this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
@@ -52,7 +42,21 @@ export class LibrosComponent implements OnInit {
         this.paginador = response;
         console.log(response.content);
       });
+    });
+
+    this.modalService.notificarUpload.subscribe(libro => {
+      this.libros = this.libros.map(libroOriginal => {
+        if(libro.id == libroOriginal.id)
+        {
+          libroOriginal.foto = libro.foto;
+        }
+        return libroOriginal;
+      })
     })
   }
 
+  abrirModal(libro: Libro) {
+    this.libroSeleccionado = libro;
+    this.modalService.abrirModal();
+  }
 }
