@@ -6,7 +6,10 @@
     <h5 class="card-title">Listado de libros</h5>
 
     <div class="my-2 text-left">
-      <button class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/libros/form']">Añadir libro</button>
+      <button *ngIf="authService.hasRole('ROLE_USER') || authService.hasRole('ROLE_ADMIN')"
+      class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/clientes/form']">
+        Crear cliente
+      </button>
     </div>
 
     <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
@@ -17,6 +20,8 @@
           <th scope="col" style="width:25%;">Autor</th>
           <th scope="col" style="width:25%;">Editorial</th>
           <th scope="col" style="width:2%;">Fecha de publicación</th>
+          <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
+          <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +40,12 @@
           <td style="width:25%;"><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
           <td style="width:25%;">{{libro.editorial}}</td>
           <td style="width:2%;">{{libro.fechaPublicacion}}</td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="editar" [routerLink]="['/libros/form', libro.id]" class="btn btn-primary  btn-sm">Editar</button>
+          </td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="eliminar" (click)='delete(libro)' class="btn btn-danger btn-sm">Eliminar</button>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -8,4 +8,5 @@ export class Usuario {
   fechaNacimiento: string;
   ultimoAcceso: string;
   accesoActual: string;
+  roles: string[] = [];
 }
