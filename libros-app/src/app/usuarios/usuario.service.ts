@@ -17,4 +17,8 @@ export class UsuarioService {
       map(response => response as Usuario[])
     );
   }
+
+  getUsuario(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.urlEndPoint}/${id}`);
+  }
 }

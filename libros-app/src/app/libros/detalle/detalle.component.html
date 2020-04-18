@@ -15,6 +15,9 @@
               <div class="col-sm" *ngIf="libro?.foto">
                 <img src="http://localhost:8080/api/uploads/img/{{libro.foto}}" alt="{{libro.foto}}" class="img-thumbnail rounded" />
               </div>
+              <div class="col-sm" *ngIf="!libro?.foto">
+                <img src="http://localhost:8080/images/no-portada.png" alt="No portada" class="img-thumbnail rounded" />
+              </div>
 
               <div class="col-sm">
                 <ul class="list-group text-dark mb-3" *ngIf="libro">

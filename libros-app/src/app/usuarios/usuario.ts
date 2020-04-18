@@ -1,3 +1,5 @@
+import { Estanteria } from './estanteria';
+
 export class Usuario {
   id: number;
   nombre: string;
@@ -8,5 +10,6 @@ export class Usuario {
   fechaNacimiento: string;
   ultimoAcceso: string;
   accesoActual: string;
+  estanterias: Estanteria[] = [];
   roles: string[] = [];
 }

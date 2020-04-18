@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'libros', component: LibrosComponent},
   {path: 'libros/page/:page', component: LibrosComponent},
   {path: 'notificaciones', component: NotificacionesComponent},
-  {path: 'perfil', component: PerfilComponent},
+  {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'usuarios', component: UsuariosComponent},
   {path: 'libros/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'libros/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},

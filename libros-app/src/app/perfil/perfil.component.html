@@ -1,1 +1,39 @@
-<p>perfil works!</p>
+<div class="card border-primary mb-3" *ngIf="usuario">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body text-primary">
+    <div class="container">
+      <div class="row">
+        <div class="span2 mx-5">
+          <img src="{{ imagePath }}"  alt="" class="img-rounded">
+        </div>
+        <div class="span4">
+          <blockquote>
+            <p>Nombre: {{ usuario.nombre }}<br/>
+            Apellidos: {{ usuario.apellidos }}<br/>
+            Fecha de nacimiento: {{ usuario.fechaNacimiento | date:'dd/MM/yyyy' }}<br/>
+            Último acceso: {{ usuario.ultimoAcceso | date:'dd/MM/yyyy HH:mm' }}</p>
+          </blockquote>
+          <p>
+            Correo electrónico: {{ usuario.correo }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <h5 class="card-title">Estanterías</h5>
+
+    <div *ngIf="usuario.estanterias.length > 0">
+      <ul class="list-group" *ngFor="let estanteria of usuario.estanterias">
+        <li class="list-group-item">
+          <span>{{ estanteria.nombre }} - </span>
+          <span *ngIf="estanteria.libros.length != 1">{{ estanteria.libros.length }} libros</span>
+          <span *ngIf="estanteria.libros.length == 1">{{ estanteria.libros.length }} libro</span>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="usuario.estanterias.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+        Aún no has añadido librerías
+    </div>
+  </div>
+</div>

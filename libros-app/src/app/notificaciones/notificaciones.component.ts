@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacionesComponent implements OnInit {
 
+  titulo: string = "Notificaciones";
+
   constructor() { }
 
   ngOnInit(): void {
