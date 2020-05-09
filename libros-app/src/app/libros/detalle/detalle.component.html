@@ -12,32 +12,25 @@
 
           <div class="container">
             <div class="row">
-              <div class="col-sm" *ngIf="libro?.foto">
-                <img src="http://localhost:8080/api/uploads/img/{{libro.foto}}" alt="{{libro.foto}}" class="img-thumbnail rounded" />
+              <div class="col-sm" *ngIf="libro?.idFoto">
+                <img src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg" alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded" />
               </div>
-              <div class="col-sm" *ngIf="!libro?.foto">
+              <div class="col-sm" *ngIf="!libro?.idFoto">
                 <img src="http://localhost:8080/images/no-portada.png" alt="No portada" class="img-thumbnail rounded" />
               </div>
 
               <div class="col-sm">
                 <ul class="list-group text-dark mb-3" *ngIf="libro">
                   <li class="list-group-item list-group-item-primary">Título: {{ libro.titulo }}</li>
-                  <li *ngIf="libro.autores && libro.autores.length > 0" class="list-group-item list-group-item-secondary">Autor: {{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</li>
-                  <li class="list-group-item">ISBN 10: {{ libro.isbn10 }}</li>
-                  <li class="list-group-item">ISBN 13: {{ libro.isbn13 }}</li>
-                  <li class="list-group-item">Editorial: {{ libro.editorial }}</li>
-                  <li class="list-group-item">Fecha de publicación: {{ libro.fechaPublicacion }}</li>
+                  <li *ngIf="libro.autor" class="list-group-item list-group-item-secondary">Autor: {{libro.autor}}</li>
+                  <li *ngIf="libro.idioma" class="list-group-item">Idioma: {{libro.idioma}}</li>
+                  <li *ngIf="libro.anyoPublicacion" class="list-group-item">Año de publicación: {{ libro.anyoPublicacion }}</li>
+                  <li *ngIf="libro.paginas" class="list-group-item">Páginas: {{libro.paginas}}</li>
+                  <li *ngIf="libro.valoracion" class="list-group-item">Valoración: {{libro.valoracion}} sobre 10</li>
+                  <li *ngIf="libro.generos && libro.generos.length > 0" class="list-group-item">
+                    Género: <span *ngFor="let g of libro.generos; first as isFirst"><span *ngIf="isFirst">{{ g.nombre }}</span><span *ngIf="!isFirst">, {{ g.nombre }}</span></span>
+                  </li>
                 </ul>
-
-                <div class="input-group mb-3">
-                  <div class="custom-file">
-                    <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                    <label class="custom-file-label" for="inputGroupFile04">Seleccionar portada</label>
-                  </div>
-                  <div class="input-group-append">
-                    <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
-                  </div>
-                </div>
 
                 <div *ngIf="progreso > 0" class="progress" style="height: 40px;">
                   <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width: progreso+'%'}" attr.aria-valuenow="{{ progreso }}" aria-valuemin="0" aria-valuemax="100">

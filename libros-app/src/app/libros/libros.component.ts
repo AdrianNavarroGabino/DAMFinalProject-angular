@@ -46,16 +46,6 @@ export class LibrosComponent implements OnInit {
         console.log(response.content);
       });
     });
-
-    this.modalService.notificarUpload.subscribe(libro => {
-      this.libros = this.libros.map(libroOriginal => {
-        if(libro.id == libroOriginal.id)
-        {
-          libroOriginal.foto = libro.foto;
-        }
-        return libroOriginal;
-      })
-    })
   }
 
   delete(libro: Libro): void {

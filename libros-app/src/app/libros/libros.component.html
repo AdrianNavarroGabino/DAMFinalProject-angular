@@ -8,7 +8,7 @@
     <div class="my-2 text-left">
       <button *ngIf="authService.hasRole('ROLE_USER') || authService.hasRole('ROLE_ADMIN')"
       class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/clientes/form']">
-        Crear cliente
+        Añadir libro
       </button>
     </div>
 
@@ -18,8 +18,8 @@
           <th scope="col" style="width:8%;">Portada</th>
           <th scope="col" style="width:40%;">Título</th>
           <th scope="col" style="width:25%;">Autor</th>
-          <th scope="col" style="width:25%;">Editorial</th>
-          <th scope="col" style="width:2%;">Fecha de publicación</th>
+          <th scope="col" style="width:25%;">Género</th>
+          <th scope="col" style="width:2%;">Año de publicación</th>
           <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
           <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
         </tr>
@@ -27,19 +27,19 @@
       <tbody>
         <tr *ngFor="let libro of libros">
           <td style="width:8%;">
-            <img (click)="abrirModal(libro)" *ngIf="libro?.foto"
-            src="http://localhost:8080/api/uploads/img/{{libro.foto}}"
-            alt="{{libro.foto}}" class="img-thumbnail rounded"
+            <img (click)="abrirModal(libro)" *ngIf="libro?.idFoto"
+            src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg"
+            alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded"
             style="width: 64px; cursor: pointer"/>
-            <img (click)="abrirModal(libro)" *ngIf="!libro?.foto"
+            <img (click)="abrirModal(libro)" *ngIf="!libro?.idFoto"
             src="http://localhost:8080/images/no-portada.png"
             alt="Sin foto" class="img-thumbnail rounded"
             style="width: 64px; cursor: pointer"/>
           </td>
           <td style="width:40px;"><span (click)="abrirModal(libro)" style="cursor: pointer;" class="text-primary">{{libro.titulo}}</span></td>
-          <td style="width:25%;"><span *ngIf="libro.autores && libro.autores.length > 0">{{libro.autores[0].nombre}} {{libro.autores[0].apellidos}}</span></td>
-          <td style="width:25%;">{{libro.editorial}}</td>
-          <td style="width:2%;">{{libro.fechaPublicacion}}</td>
+          <td style="width:25%;"><span *ngIf="libro.autor">{{libro.autor}}</span></td>
+          <td style="width:25%;"><span *ngFor="let g of libro.generos; first as isFirst"><span *ngIf="isFirst">{{ g.nombre }}</span><span *ngIf="!isFirst">, {{ g.nombre }}</span></span></td>
+          <td style="width:2%;">{{libro.anyoPublicacion}}</td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="editar" [routerLink]="['/libros/form', libro.id]" class="btn btn-primary  btn-sm">Editar</button>
           </td>
