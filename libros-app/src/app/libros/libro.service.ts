@@ -18,6 +18,10 @@ export class LibroService {
     return this.http.get(this.urlEndPoint + '/page/' + page);
   }
 
+  getLibrosAleatorios(): Observable<any> {
+    return this.http.get(this.urlEndPoint + "/rnd");
+  }
+
   getLibro(id: number): Observable<Libro> {
     return this.http.get<Libro>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
@@ -30,6 +34,10 @@ export class LibroService {
         return throwError(e);
       })
     );
+  }
+
+  buscarLibros(buscar: string, page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/' + buscar.replace(" ", "-") + '/page/' + page);
   }
 
   create(libro: Libro): Observable<any> {

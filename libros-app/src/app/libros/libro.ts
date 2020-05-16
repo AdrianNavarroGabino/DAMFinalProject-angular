@@ -1,10 +1,11 @@
 import { Genero } from './genero';
+import { Autor } from './autor';
 
 export class Libro {
   id: number;
   idFoto: number;
   titulo: string;
-  autor: string;
+  autor: Autor;
   idioma: string;
   generos: Genero[];
   paginas: number;

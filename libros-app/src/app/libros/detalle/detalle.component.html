@@ -22,7 +22,7 @@
               <div class="col-sm">
                 <ul class="list-group text-dark mb-3" *ngIf="libro">
                   <li class="list-group-item list-group-item-primary">Título: {{ libro.titulo }}</li>
-                  <li *ngIf="libro.autor" class="list-group-item list-group-item-secondary">Autor: {{libro.autor}}</li>
+                  <li *ngIf="libro.autor" class="list-group-item list-group-item-secondary">Autor: {{libro.autor.nombre}}</li>
                   <li *ngIf="libro.idioma" class="list-group-item">Idioma: {{libro.idioma}}</li>
                   <li *ngIf="libro.anyoPublicacion" class="list-group-item">Año de publicación: {{ libro.anyoPublicacion }}</li>
                   <li *ngIf="libro.paginas" class="list-group-item">Páginas: {{libro.paginas}}</li>
@@ -44,7 +44,53 @@
 
         </div>
         <div class="modal-footer">
+          <button *ngIf="authService.hasRole('ROLE_USER')" type="button" (click)="abrirModalAnyadir()" class="btn btn-success mr-auto" data-dismiss="modal">Añadir a mi estantería</button>
           <button type="button" (click)="cerrarModal()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.anyadir">
+  <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ tituloAnyadir }}</h5>
+          <button (click)="cerrarModalAnyadir()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <ul class="list-group text-dark mb-3" *ngIf="libro">
+                  <li class="list-group-item list-group-item-primary">Elige estanteria</li>
+                  <div *ngIf="usuario">
+                    <div *ngIf="usuario.estanterias.length > 0">
+                      <li *ngFor="let estanteria of usuario.estanterias" class="list-group-item">{{ estanteria.nombre }}</li>
+                    </div>
+
+                    <li class="list-group-item">
+                      <form class="form-inline">
+                        <input type="text" class="form-control w-70" [(ngModel)]="nuevaEstanteria" name="nuevaEstanteria" required>
+                        <button type="button" (click)="crearEstanteria()" class="btn btn-success mx-3" data-dismiss="modal" [disabled]='nuevaEstanteria == ""'>Crear</button>
+                      </form>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="cerrarModalAnyadir()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>

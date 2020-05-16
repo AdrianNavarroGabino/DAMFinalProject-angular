@@ -37,7 +37,7 @@
             style="width: 64px; cursor: pointer"/>
           </td>
           <td style="width:40px;"><span (click)="abrirModal(libro)" style="cursor: pointer;" class="text-primary">{{libro.titulo}}</span></td>
-          <td style="width:25%;"><span *ngIf="libro.autor">{{libro.autor}}</span></td>
+          <td style="width:25%;"><span *ngIf="libro.autor">{{libro.autor.nombre}}</span></td>
           <td style="width:25%;"><span *ngFor="let g of libro.generos; first as isFirst"><span *ngIf="isFirst">{{ g.nombre }}</span><span *ngIf="!isFirst">, {{ g.nombre }}</span></span></td>
           <td style="width:2%;">{{libro.anyoPublicacion}}</td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
