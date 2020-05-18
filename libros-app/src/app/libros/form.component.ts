@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
 
   cargarLibro(): void {
     this.activatedRoute.params.subscribe(params => {
-      let id = params['id']
+      let id = params['id'];
       if(id) {
         this.libroService.getLibro(id).subscribe(libro => this.libro = libro)
       }

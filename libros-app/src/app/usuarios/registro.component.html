@@ -1,0 +1,85 @@
+<div class="card bg-dark text-white my-5 mx-auto" style="max-width: 1500px;">
+  <div class="card-header mx-auto">{{ tituloForm }}</div>
+  <div class="card-body">
+    <form (ngSubmit) = "create()" #usuarioForm="ngForm">
+
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.nombre" name="nombre" required #nombre="ngModel">
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors.required">
+              Introduce un nombre
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="apellidos" class="col-form-label col-sm-2">Apellidos</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.apellidos" name="apellidos" required #apellidos="ngModel">
+          <div class="alert alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+            <div *ngIf="apellidos.errors.required">
+              Introduce apellidos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="username" class="col-form-label col-sm-2">Username</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.username" name="username" required #username="ngModel">
+          <div class="alert alert-danger" *ngIf="username.invalid && (username.dirty || username.touched)">
+            <div *ngIf="username.errors.required">
+              Introduce un username
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="correo" class="col-form-label col-sm-2">Correo electrónico</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="usuario.correo" name="correo" required #correo="ngModel">
+          <div class="alert alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+            <div *ngIf="correo.errors.required">
+              Introduce un correo
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="password" class="col-form-label col-sm-2">Contraseña</label>
+        <div class="col-sm-6">
+          <input type="password" class="form-control" [(ngModel)]="usuario.password" name="password" required #password="ngModel">
+          <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <div *ngIf="password.errors.required">
+              Introduce una contraseña
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="fechaNacimiento" class="col-form-label col-sm-2">Fecha de nacimiento</label>
+        <div class="col-sm-6">
+          <input type="date" class="form-control" [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" required #fechaNacimiento="ngModel">
+          <div class="alert alert-danger" *ngIf="fechaNacimiento.invalid && (fechaNacimiento.dirty || fechaNacimiento.touched)">
+            <div *ngIf="fechaNacimiento.errors.required">
+              Introduce la fecha de nacimiento
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mx-auto py-2">
+        <div clas="col-sm-6">
+          <button class="btn btn-primary" role="button" [disabled]="!usuarioForm.form.valid">Registrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

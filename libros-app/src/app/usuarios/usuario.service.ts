@@ -28,6 +28,24 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.urlEndPoint}/${id}`);
   }
 
+  create(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.urlEndPoint, usuario).pipe(
+      catchError(e => {
+
+        if(e.status == 400 && e.error.mensaje)
+        {
+         return throwError(e);
+        }
+
+        if(e.error.mensaje)
+        {
+         console.error(e.error.mensaje);
+        }
+        return throwError(e);
+     })
+    );
+  }
+
   getSeguido(idSeguidor: number, idSeguido: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.urlEndPoint}/${idSeguidor}/${idSeguido}`);
   }
