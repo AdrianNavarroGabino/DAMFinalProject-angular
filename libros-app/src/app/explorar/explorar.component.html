@@ -27,7 +27,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let autor of autores">
-              <th scope="row">{{ autor.nombre }}</th>
+              <th scope="row"><a [routerLink]="['/autor', autor.id]">{{ autor.nombre }}</a></th>
             </tr>
             <tr *ngIf="autores.length == 10">
               <th scope="row">...</th>

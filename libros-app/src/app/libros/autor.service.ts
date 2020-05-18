@@ -14,4 +14,8 @@ export class AutorService {
   getAutores(page: number): Observable<any> {
     return this.http.get(this.urlEndPoint + '/page/' + page);
   }
+
+  getLibrosPorAutor(id: number, page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/' + id + '/page/' + page);
+  }
 }

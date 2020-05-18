@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="mx-4 my-2" *ngIf="availableSeguir && !isSeguido">
-        <button type="button" class="btn btn-outline-success btn-lg">Seguir</button>
+        <button type="button" (click)="seguir()" class="btn btn-outline-success btn-lg">Seguir</button>
       </div>
       <div class="mx-4 my-2" *ngIf="availableSeguir && isSeguido">
-        <button type="button" class="btn btn-success btn-lg">Seguido</button>
+        <button type="button" (click)="dejarDeSeguir()" class="btn btn-success btn-lg">Seguido</button>
       </div>
     </div>
 
@@ -41,5 +41,21 @@
     <div *ngIf="usuario.estanterias.length == 0" class="p-3 mb-2 bg-info text-white text-center">
         {{ noLibrerias }}
     </div>
+
+    <br/><br/>
+
+    <h5 class="card-title">Seguidos</h5>
+
+    <div *ngIf="usuario.seguidos.length > 0">
+      <ul class="list-group" *ngFor="let seguido of usuario.seguidos">
+        <li class="list-group-item">
+          <a [routerLink]="['/perfil', seguido.id]">{{ seguido.nombre }} {{ seguido.apellidos }} - {{ seguido.username }}</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="usuario.seguidos.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+        {{ noSeguidos }}
+    </div>
+
   </div>
 </div>

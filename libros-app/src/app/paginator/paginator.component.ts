@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'paginator-nav',
@@ -11,9 +12,24 @@ export class PaginatorComponent implements OnInit, OnChanges {
   desde: number;
   hasta: number;
 
-  constructor() { }
+  ruta: string;
+
+  constructor(private activatedRoute: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let id = +params.get('id');
+
+      if(id) {
+        this.ruta = "/autor/" + id + "/page";
+      }
+      else {
+        this.ruta = "/libros/page";
+      }
+    })
+
     this.initPaginator();
   }
 

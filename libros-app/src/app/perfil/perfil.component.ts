@@ -3,6 +3,7 @@ import { Usuario } from '../usuarios/usuario';
 import { AuthService } from '../usuarios/auth.service';
 import { UsuarioService } from '../usuarios/usuario.service';
 import { ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -17,6 +18,7 @@ export class PerfilComponent implements OnInit {
   id: number;
   idUsuario: number;
   noLibrerias: string;
+  noSeguidos: string;
   availableSeguir: boolean;
   isSeguido: boolean;
 
@@ -26,15 +28,19 @@ export class PerfilComponent implements OnInit {
     this.idUsuario = this.authService.usuario.id;
     activatedRoute.params.subscribe(params => {
       this.id = params['id'];
+      console.log('params id: ' + params['id']);
       if(!this.id) {
         this.id = this.authService.usuario.id;
         this.noLibrerias = "Aún no has añadido librerías";
-        this.availableSeguir = true;
-      }
-      else {
-        this.noLibrerias = "Aún no ha añadido librerías";
+        this.noSeguidos = "Aún no sigues a nadie";
         this.availableSeguir = false;
       }
+      else if(this.id && this.id != this.idUsuario) {
+        this.noLibrerias = "Aún no ha añadido librerías";
+        this.noSeguidos = "Aún no sigue a nadie";
+        this.availableSeguir = true;
+      }
+      console.log('constructor availableSeguir: ' + this.availableSeguir);
     });
 
     this.usuario = this.authService.usuario;
@@ -57,12 +63,40 @@ export class PerfilComponent implements OnInit {
           else {
             this.isSeguido = false;
           }
-
-          console.log(this.isSeguido);
-          console.log(this.availableSeguir);
         });
       }
     });
   }
 
+  seguir() {
+    this.usuarioService.seguirUsuario(this.idUsuario, this.usuario).subscribe();
+    this.isSeguido = true;
+  }
+
+  dejarDeSeguir() {
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: '¿Estás seguro?',
+      text: `¿Seguro que quieres dejar de seguir a ${this.usuario.nombre} ${this.usuario.apellidos}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Dejar de seguir',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+
+        this.usuarioService.dejarDeSeguir(this.idUsuario, this.usuario).subscribe();
+
+        this.isSeguido = false;
+      }
+    })
+  }
 }

@@ -21,7 +21,6 @@ import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
-import { BuscarComponent } from './buscar/buscar.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch: 'full'},
@@ -36,7 +35,9 @@ const routes: Routes = [
   {path: 'libros/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'libros/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
-  {path: 'libros/:buscar/page/:page', component: ExplorarComponent}
+  {path: 'libros/:buscar/page/:page', component: LibrosComponent},
+  {path: 'autor/:id/page/:page', component: LibrosComponent},
+  {path: 'autor/:id', component: LibrosComponent}
 ]
 
 @NgModule({
@@ -53,8 +54,7 @@ const routes: Routes = [
     FormComponent,
     PaginatorComponent,
     DetalleComponent,
-    LoginComponent,
-    BuscarComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,

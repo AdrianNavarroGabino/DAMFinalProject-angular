@@ -10,6 +10,7 @@ export class Usuario {
   fechaNacimiento: string;
   ultimoAcceso: string;
   accesoActual: string;
-  estanterias: Estanteria[] = [];
+  estanterias: Estanteria[];
   roles: string[] = [];
+  seguidos: Usuario[];
 }

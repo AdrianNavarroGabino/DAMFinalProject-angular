@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { ModalService } from './detalle/modal.service';
 import { AuthService } from '../usuarios/auth.service';
 import swal from 'sweetalert2';
+import { AutorService } from './autor.service';
 
 @Component({
   selector: 'app-libros',
@@ -19,6 +20,7 @@ export class LibrosComponent implements OnInit {
   libroSeleccionado: Libro;
 
   constructor(private libroService: LibroService,
+    private autorService: AutorService,
     private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     public authService: AuthService) { }
@@ -26,25 +28,27 @@ export class LibrosComponent implements OnInit {
   ngOnInit(): void {
 
     this.activatedRoute.paramMap.subscribe(params => {
-      let page: number = +params.get('page');
+      let id = +params.get('id');
+      let page = +params.get('page');
 
       if(!page)
       {
         page = 0;
       }
 
-      this.libroService.getLibros(page).pipe(
-        tap(response => {
-          console.log('ClientesComponent: Tap 3');
-          (response.content as Libro[]).forEach( libro => {
-            console.log(libro.titulo);
-          });
-        })
-      ).subscribe(response => {
-        this.libros = response.content as Libro[];
-        this.paginador = response;
-        console.log(response.content);
-      });
+      if(!id) {
+        this.libroService.getLibros(page).subscribe(response => {
+          this.libros = response.content as Libro[];
+          this.paginador = response;
+          console.log(response.content);
+        });
+      }
+      else {
+        this.autorService.getLibrosPorAutor(id, page).subscribe(response => {
+          this.libros = response.content as Libro[];
+          this.paginador = response;
+        });
+      }
     });
   }
 
