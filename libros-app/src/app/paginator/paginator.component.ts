@@ -20,10 +20,19 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
+      console.log(params);
       let id = +params.get('id');
+      let idGenero = +params.get('idGenero');
+      let buscar = params.get('buscar');
 
       if(id) {
         this.ruta = "/autor/" + id + "/page";
+      }
+      else if(idGenero) {
+        this.ruta = "/libros/generos/" + idGenero + "/page";
+      }
+      else if(buscar) {
+        this.ruta = "/libros/buscar/" + buscar.replace("-", " ") + "/page";
       }
       else {
         this.ruta = "/libros/page";

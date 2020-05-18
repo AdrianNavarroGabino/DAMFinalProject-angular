@@ -24,7 +24,7 @@
           <h5 class="card-title" (click)="abrirModal(libro)" style="cursor: pointer;">{{libro.titulo}}</h5>
         </div>
         <div class="card-footer">
-          <p class="text-muted responsive" style="width: 300px;">{{libro.autor.nombre}}</p>
+          <p class="text-muted responsive" style="width: 300px;"><a [routerLink]="['/autor', libro.autor.id]">{{libro.autor.nombre}}</a></p>
         </div>
       </div>
     </div>

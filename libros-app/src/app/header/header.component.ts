@@ -30,20 +30,8 @@ export class HeaderComponent implements OnInit {
 
   realizarConsulta() {
     if(this.buscar != "") {
-      this.activatedRoute.paramMap.subscribe(params => {
-        let page: number = +params.get('page');
-
-        if(!page)
-        {
-          page = 0;
-        }
-        this.libroService.buscarLibros(this.buscar, page).subscribe(response => {
-          this.libros = response.content as Libro[];
-          this.paginador = response;
-          console.log(response.content);
-        });
-        this.router.navigate(['libros/' + this.buscar + '/page/' + page]);
-      });
+      this.router.navigate(['/libros/buscar/' + this.buscar.replace(" ", "-")]);
+      this.buscar = "";
     }
   }
 }

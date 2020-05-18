@@ -14,7 +14,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let genero of generos">
-              <th scope="row">{{ genero.nombre }}</th>
+              <th scope="row"><a [routerLink]="['/libros/generos', genero.id]">{{ genero.nombre }}</a></th>
             </tr>
           </tbody>
         </table>

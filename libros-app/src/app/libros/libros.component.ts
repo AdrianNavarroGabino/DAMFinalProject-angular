@@ -30,25 +30,41 @@ export class LibrosComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
       let page = +params.get('page');
+      let idGenero = +params.get('idGenero');
+      let buscar = params.get('buscar');
 
       if(!page)
       {
         page = 0;
       }
 
-      if(!id) {
+      if(id) {
+        this.autorService.getLibrosPorAutor(id, page).subscribe(response => {
+          this.libros = response.content as Libro[];
+          this.paginador = response;
+        });
+      }
+      else if(idGenero) {
+        this.libroService.getLibrosPorGenero(idGenero, page).subscribe(response => {
+          this.libros = response.content as Libro[];
+          this.paginador = response;
+        });
+      }
+      else if(buscar && buscar.length > 0) {
+        this.libroService.buscarLibros(buscar.replace("-", " "), page).subscribe(response => {
+          console.log(response);
+          this.libros = response.content as Libro[];
+          this.paginador = response;
+        })
+      }
+      else {
         this.libroService.getLibros(page).subscribe(response => {
           this.libros = response.content as Libro[];
           this.paginador = response;
           console.log(response.content);
         });
       }
-      else {
-        this.autorService.getLibrosPorAutor(id, page).subscribe(response => {
-          this.libros = response.content as Libro[];
-          this.paginador = response;
-        });
-      }
+
     });
   }
 

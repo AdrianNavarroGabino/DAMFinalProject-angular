@@ -35,9 +35,12 @@ const routes: Routes = [
   {path: 'libros/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'libros/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
-  {path: 'libros/:buscar/page/:page', component: LibrosComponent},
+  {path: 'libros/buscar/:buscar', component: LibrosComponent},
+  {path: 'libros/buscar/:buscar/page/:page', component: LibrosComponent},
   {path: 'autor/:id/page/:page', component: LibrosComponent},
-  {path: 'autor/:id', component: LibrosComponent}
+  {path: 'autor/:id', component: LibrosComponent},
+  {path: 'libros/generos/:idGenero/page/:page', component: LibrosComponent},
+  {path: 'libros/generos/:idGenero', component: LibrosComponent}
 ]
 
 @NgModule({

@@ -36,8 +36,12 @@ export class LibroService {
     );
   }
 
+  getLibrosPorGenero(idGenero: number, page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/generos/' + idGenero + '/page/' + page);
+  }
+
   buscarLibros(buscar: string, page: number): Observable<any> {
-    return this.http.get(this.urlEndPoint + '/' + buscar.replace(" ", "-") + '/page/' + page);
+    return this.http.post(this.urlEndPoint + '/buscar/page/' + page, buscar);
   }
 
   create(libro: Libro): Observable<any> {

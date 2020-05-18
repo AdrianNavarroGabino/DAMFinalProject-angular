@@ -22,7 +22,7 @@
               <div class="col-sm">
                 <ul class="list-group text-dark mb-3" *ngIf="libro">
                   <li class="list-group-item list-group-item-primary">Título: {{ libro.titulo }}</li>
-                  <li *ngIf="libro.autor" class="list-group-item list-group-item-secondary">Autor: {{libro.autor.nombre}}</li>
+                  <li *ngIf="libro.autor" class="list-group-item list-group-item-secondary">Autor: <a [routerLink]="['/autor', libro.autor.id]">{{libro.autor.nombre}}</a></li>
                   <li *ngIf="libro.idioma" class="list-group-item">Idioma: {{libro.idioma}}</li>
                   <li *ngIf="libro.anyoPublicacion" class="list-group-item">Año de publicación: {{ libro.anyoPublicacion }}</li>
                   <li *ngIf="libro.paginas" class="list-group-item">Páginas: {{libro.paginas}}</li>
