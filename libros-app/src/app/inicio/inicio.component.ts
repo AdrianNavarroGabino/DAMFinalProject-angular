@@ -7,8 +7,7 @@ import { AuthService } from '../usuarios/auth.service';
 
 @Component({
   selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  templateUrl: './inicio.component.html'
 })
 export class InicioComponent implements OnInit {
 
@@ -21,13 +20,17 @@ export class InicioComponent implements OnInit {
     public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.libroService.getLibrosAleatorios().subscribe(response => {
-      this.libros = response;
-    })
+    this.getLibros()
   }
 
   abrirModal(libro: Libro) {
     this.libroSeleccionado = libro;
     this.modalService.abrirModal();
+  }
+
+  getLibros() {
+    this.libroService.getLibrosAleatorios().subscribe(response => {
+      this.libros = response;
+    });
   }
 }

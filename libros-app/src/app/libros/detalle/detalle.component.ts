@@ -7,6 +7,8 @@ import { HttpEventType } from '@angular/common/http';
 import { ModalService } from './modal.service';
 import { AuthService } from 'src/app/usuarios/auth.service';
 import { Usuario } from 'src/app/usuarios/usuario';
+import { UsuarioService } from 'src/app/usuarios/usuario.service';
+import { Estanteria } from 'src/app/usuarios/estanteria';
 
 @Component({
   selector: 'detalle-libro',
@@ -22,7 +24,7 @@ export class DetalleComponent implements OnInit {
   usuario: Usuario;
   nuevaEstanteria: string = "";
 
-  constructor(private libroService: LibroService,
+  constructor(private usuarioService: UsuarioService,
     public modalService: ModalService,
     public authService: AuthService) { }
 
@@ -45,7 +47,26 @@ export class DetalleComponent implements OnInit {
     this.modalService.cerraAnyadir();
   }
 
-  crearEstanteria() {
-    console.log(this.nuevaEstanteria);
+  crearEstanteria(libro: Libro) {
+    this.usuarioService.guardarEstanteria(this.nuevaEstanteria, this.usuario.id).subscribe(response => {
+      this.nuevaEstanteria = "";
+      console.log(response);
+
+      let estanteria: Estanteria;
+      if(response != null) {
+        estanteria = response as Estanteria;
+      }
+      else {
+        this.usuarioService.getEstanteria(this.nuevaEstanteria, this.usuario.id).subscribe(r => {
+          estanteria = r as Estanteria;
+        });
+      }
+
+      this.usuarioService.addEstanteria(this.nuevaEstanteria, this.usuario.id).subscribe();
+
+      this.usuarioService.guardarLibroEstanteria(estanteria.id, libro).subscribe();
+    });
+
+    this.cerrarModalAnyadir();
   }
 }

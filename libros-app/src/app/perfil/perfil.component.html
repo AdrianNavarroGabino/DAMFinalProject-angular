@@ -18,6 +18,12 @@
           </p>
         </div>
       </div>
+      <div class="mx-4 my-2" *ngIf="availableSeguir && !isSeguido">
+        <button type="button" class="btn btn-outline-success btn-lg">Seguir</button>
+      </div>
+      <div class="mx-4 my-2" *ngIf="availableSeguir && isSeguido">
+        <button type="button" class="btn btn-success btn-lg">Seguido</button>
+      </div>
     </div>
 
 
@@ -33,7 +39,7 @@
       </ul>
     </div>
     <div *ngIf="usuario.estanterias.length == 0" class="p-3 mb-2 bg-info text-white text-center">
-        Aún no has añadido librerías
+        {{ noLibrerias }}
     </div>
   </div>
 </div>

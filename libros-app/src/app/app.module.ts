@@ -21,6 +21,7 @@ import { AuthGuard } from './usuarios/guards/auth.guard';
 import { RoleGuard } from './usuarios/guards/role.guard';
 import { TokenInterceptor } from './usuarios/interceptors/token.interceptor';
 import { AuthInterceptor } from './usuarios/interceptors/auth.interceptor';
+import { BuscarComponent } from './buscar/buscar.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/inicio', pathMatch: 'full'},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'libros/page/:page', component: LibrosComponent},
   {path: 'notificaciones', component: NotificacionesComponent},
   {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
+  {path: 'perfil/:id', component: PerfilComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'usuarios', component: UsuariosComponent},
   {path: 'libros/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'libros/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
@@ -51,7 +53,8 @@ const routes: Routes = [
     FormComponent,
     PaginatorComponent,
     DetalleComponent,
-    LoginComponent
+    LoginComponent,
+    BuscarComponent
   ],
   imports: [
     BrowserModule,

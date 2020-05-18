@@ -3,6 +3,7 @@
 <div class="card border-primary mb-3">
   <div class="card-header">Inicio</div>
   <div class="card-body text-primary">
+    <button type="button" (click)="getLibros()" class="btn btn-primary float-right" name="actualizar">Actualizar</button>
     <h5 class="card-title">Qué leer</h5>
 
     <div class="card-deck card-group d-inline-flex col-2 p-2 m-2" *ngFor="let libro of libros">

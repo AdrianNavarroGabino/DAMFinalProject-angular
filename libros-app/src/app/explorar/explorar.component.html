@@ -1,1 +1,59 @@
-<p>explorar works!</p>
+
+<div class="card border-primary mb-3">
+  <div class="card-header">Libros</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Explorar</h5>
+
+    <div class="container">
+      <div class="row">
+        <table class="table table-borderless col mx-1" *ngIf="generos">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Género</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let genero of generos">
+              <th scope="row">{{ genero.nombre }}</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-borderless col mx-1" *ngIf="autores">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Autores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let autor of autores">
+              <th scope="row">{{ autor.nombre }}</th>
+            </tr>
+            <tr *ngIf="autores.length == 10">
+              <th scope="row">...</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-borderless col mx-1" *ngIf="usuarios">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"></th>
+              <th>Lectores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <th scope="row"><img src="https://api.adorable.io/avatars/30/{{ usuario.id }}"  alt="" class="img-rounded"></th>
+              <th><a [routerLink]="['/perfil', usuario.id]">{{ usuario.nombre }} {{ usuario.apellidos }} - {{ usuario.username }}</a></th>
+            </tr>
+            <tr *ngIf="usuarios.length == 10">
+              <th scope="row"></th>
+              <th>...</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
