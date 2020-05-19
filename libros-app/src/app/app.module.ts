@@ -42,7 +42,9 @@ const routes: Routes = [
   {path: 'autor/:id/page/:page', component: LibrosComponent},
   {path: 'autor/:id', component: LibrosComponent},
   {path: 'libros/generos/:idGenero/page/:page', component: LibrosComponent},
-  {path: 'libros/generos/:idGenero', component: LibrosComponent}
+  {path: 'libros/generos/:idGenero', component: LibrosComponent},
+  {path: 'perfil/libros/estanterias/:idEstanteria/page/:page', component: LibrosComponent},
+  {path: 'perfil/libros/estanterias/:idEstanteria', component: LibrosComponent}
 ]
 
 @NgModule({

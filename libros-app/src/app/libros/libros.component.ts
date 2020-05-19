@@ -18,6 +18,7 @@ export class LibrosComponent implements OnInit {
   libros: Libro[];
   paginador: any;
   libroSeleccionado: Libro;
+  isAnyadirLibroAvailable: boolean = false;
 
   constructor(private libroService: LibroService,
     private autorService: AutorService,
@@ -32,6 +33,7 @@ export class LibrosComponent implements OnInit {
       let page = +params.get('page');
       let idGenero = +params.get('idGenero');
       let buscar = params.get('buscar');
+      let idEstanteria = +params.get('idEstanteria');
 
       if(!page)
       {
@@ -57,7 +59,14 @@ export class LibrosComponent implements OnInit {
           this.paginador = response;
         })
       }
+      else if(idEstanteria) {
+        this.libroService.getEstanteria(idEstanteria, page).subscribe(response => {
+          this.libros = response.content as Libro[];
+          this.paginador = response;
+        })
+      }
       else {
+        this.isAnyadirLibroAvailable = true;
         this.libroService.getLibros(page).subscribe(response => {
           this.libros = response.content as Libro[];
           this.paginador = response;

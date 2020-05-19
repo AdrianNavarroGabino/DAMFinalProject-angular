@@ -72,8 +72,10 @@
                 <ul class="list-group text-dark mb-3" *ngIf="libro">
                   <li class="list-group-item list-group-item-primary">Elige estanteria</li>
                   <div *ngIf="usuario">
-                    <div *ngIf="usuario.estanterias.length > 0">
-                      <li *ngFor="let estanteria of usuario.estanterias" class="list-group-item">{{ estanteria.nombre }}</li>
+                    <div *ngIf="usuario.estanterias && usuario.estanterias.length > 0">
+                      <li *ngFor="let estanteria of usuario.estanterias" class="list-group-item">
+                        <span (click)="anyadirLibro(estanteria.id)" style="cursor: pointer;">{{ estanteria.nombre }}</span>
+                      </li>
                     </div>
 
                     <li class="list-group-item">

@@ -29,6 +29,9 @@ export class DetalleComponent implements OnInit {
     public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.usuarioService.getUsuario(this.authService.usuario.id).subscribe(usuario => {
+      this.usuario = usuario;
+    })
   }
 
   cerrarModal() {
@@ -40,7 +43,6 @@ export class DetalleComponent implements OnInit {
   abrirModalAnyadir() {
     this.modalService.cerrarModal();
     this.modalService.abrirAnyadir();
-    this.usuario = this.authService.usuario;
   }
 
   cerrarModalAnyadir() {
@@ -68,5 +70,9 @@ export class DetalleComponent implements OnInit {
     });
 
     this.cerrarModalAnyadir();
+  }
+
+  anyadirLibro(idEstanteria: number) {
+    this.usuarioService.guardarLibroEstanteria(idEstanteria, this.libro).subscribe();
   }
 }

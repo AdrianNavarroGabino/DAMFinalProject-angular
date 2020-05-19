@@ -29,16 +29,18 @@
 
     <h5 class="card-title">Estanterías</h5>
 
-    <div *ngIf="usuario.estanterias.length > 0">
+    <div *ngIf="usuario.estanterias && usuario.estanterias.length > 0">
       <ul class="list-group" *ngFor="let estanteria of usuario.estanterias">
         <li class="list-group-item">
-          <span>{{ estanteria.nombre }} - </span>
-          <span *ngIf="estanteria.libros.length != 1">{{ estanteria.libros.length }} libros</span>
-          <span *ngIf="estanteria.libros.length == 1">{{ estanteria.libros.length }} libro</span>
+          <a [routerLink]="['libros/estanterias/', estanteria.id]">
+            <span>{{ estanteria.nombre }} - </span>
+            <span *ngIf="estanteria.libros.length != 1">{{ estanteria.libros.length }} libros</span>
+            <span *ngIf="estanteria.libros.length == 1">{{ estanteria.libros.length }} libro</span>
+          </a>
         </li>
       </ul>
     </div>
-    <div *ngIf="usuario.estanterias.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+    <div *ngIf="!usuario.estanterias || usuario.estanterias.length == 0" class="p-3 mb-2 bg-info text-white text-center">
         {{ noLibrerias }}
     </div>
 
@@ -46,14 +48,14 @@
 
     <h5 class="card-title">Seguidos</h5>
 
-    <div *ngIf="usuario.seguidos.length > 0">
+    <div *ngIf="usuario.seguidos && usuario.seguidos.length > 0">
       <ul class="list-group" *ngFor="let seguido of usuario.seguidos">
         <li class="list-group-item">
           <a [routerLink]="['/perfil', seguido.id]">{{ seguido.nombre }} {{ seguido.apellidos }} - {{ seguido.username }}</a>
         </li>
       </ul>
     </div>
-    <div *ngIf="usuario.seguidos.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+    <div *ngIf="!usuario.seguidos || usuario.seguidos.length == 0" class="p-3 mb-2 bg-info text-white text-center">
         {{ noSeguidos }}
     </div>
 

@@ -5,7 +5,7 @@
   <div class="card-body text-primary">
     <h5 class="card-title">Listado de libros</h5>
 
-    <div class="my-2 text-left">
+    <div class="my-2 text-left" *ngIf="isAnyadirLibroAvailable">
       <button *ngIf="authService.hasRole('ROLE_USER') || authService.hasRole('ROLE_ADMIN')"
       class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/clientes/form']">
         Añadir libro
@@ -50,6 +50,9 @@
       </tbody>
     </table>
 
+    <div *ngIf="!libros || libros.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+        No hay resultados
+    </div>
 
     <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
   </div>

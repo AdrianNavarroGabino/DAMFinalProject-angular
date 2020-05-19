@@ -40,6 +40,10 @@ export class LibroService {
     return this.http.get(this.urlEndPoint + '/generos/' + idGenero + '/page/' + page);
   }
 
+  getEstanteria(idEstanteria: number, page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/estanterias/' + idEstanteria + '/page/' + page);
+  }
+
   buscarLibros(buscar: string, page: number): Observable<any> {
     return this.http.post(this.urlEndPoint + '/buscar/page/' + page, buscar);
   }

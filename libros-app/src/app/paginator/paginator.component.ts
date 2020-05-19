@@ -24,6 +24,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
       let id = +params.get('id');
       let idGenero = +params.get('idGenero');
       let buscar = params.get('buscar');
+      let idEstanteria = +params.get('idEstanteria');
 
       if(id) {
         this.ruta = "/autor/" + id + "/page";
@@ -33,6 +34,9 @@ export class PaginatorComponent implements OnInit, OnChanges {
       }
       else if(buscar) {
         this.ruta = "/libros/buscar/" + buscar.replace("-", " ") + "/page";
+      }
+      else if(idEstanteria) {
+        this.ruta = "/libros/estanterias/" + idEstanteria + "/page/";
       }
       else {
         this.ruta = "/libros/page";

@@ -107,7 +107,7 @@ export class UsuarioService {
   }
 
   guardarLibroEstanteria(idEstanteria: number, libro: Libro): Observable<any> {
-    return this.http.put<any>(this.urlEndPoint + '/estanterias', libro).pipe(
+    return this.http.put<any>(this.urlEndPoint + '/estanterias/' + idEstanteria, libro).pipe(
       catchError(e => {
 
         if(e.status == 400 && e.error.mensaje)
