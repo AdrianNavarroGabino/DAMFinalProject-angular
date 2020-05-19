@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Libro } from './libro';
 import { LibroService } from './libro.service';
 import { ActivatedRoute } from '@angular/router';
-import { tap } from 'rxjs/operators';
 import { ModalService } from './detalle/modal.service';
 import { AuthService } from '../usuarios/auth.service';
 import swal from 'sweetalert2';
@@ -10,8 +9,7 @@ import { AutorService } from './autor.service';
 
 @Component({
   selector: 'app-libros',
-  templateUrl: './libros.component.html',
-  styleUrls: ['./libros.component.css']
+  templateUrl: './libros.component.html'
 })
 export class LibrosComponent implements OnInit {
 
@@ -54,7 +52,6 @@ export class LibrosComponent implements OnInit {
       }
       else if(buscar && buscar.length > 0) {
         this.libroService.buscarLibros(buscar.replace("-", " "), page).subscribe(response => {
-          console.log(response);
           this.libros = response.content as Libro[];
           this.paginador = response;
         })
@@ -70,7 +67,6 @@ export class LibrosComponent implements OnInit {
         this.libroService.getLibros(page).subscribe(response => {
           this.libros = response.content as Libro[];
           this.paginador = response;
-          console.log(response.content);
         });
       }
 

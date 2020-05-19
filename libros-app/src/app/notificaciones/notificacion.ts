@@ -1,5 +1,3 @@
-import { Usuario } from '../usuarios/usuario';
-
 export class Notificacion {
   id: number;
   notificacion: string;

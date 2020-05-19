@@ -7,8 +7,7 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  templateUrl: './perfil.component.html'
 })
 export class PerfilComponent implements OnInit {
 
@@ -28,7 +27,6 @@ export class PerfilComponent implements OnInit {
     this.idUsuario = this.authService.usuario.id;
     activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      console.log('params id: ' + params['id']);
       if(!this.id) {
         this.id = this.authService.usuario.id;
         this.noLibrerias = "Aún no has añadido librerías";
@@ -40,7 +38,6 @@ export class PerfilComponent implements OnInit {
         this.noSeguidos = "Aún no sigue a nadie";
         this.availableSeguir = true;
       }
-      console.log('constructor availableSeguir: ' + this.availableSeguir);
     });
 
     this.usuario = this.authService.usuario;

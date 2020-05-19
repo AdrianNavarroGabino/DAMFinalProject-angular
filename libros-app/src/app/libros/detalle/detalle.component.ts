@@ -1,9 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Libro } from '../libro';
-import { LibroService } from '../libro.service';
-import { ActivatedRoute } from '@angular/router';
-import swal from 'sweetalert2';
-import { HttpEventType } from '@angular/common/http';
 import { ModalService } from './modal.service';
 import { AuthService } from 'src/app/usuarios/auth.service';
 import { Usuario } from 'src/app/usuarios/usuario';
@@ -52,7 +48,6 @@ export class DetalleComponent implements OnInit {
   crearEstanteria(libro: Libro) {
     this.usuarioService.guardarEstanteria(this.nuevaEstanteria, this.usuario.id).subscribe(response => {
       this.nuevaEstanteria = "";
-      console.log(response);
 
       let estanteria: Estanteria;
       if(response != null) {

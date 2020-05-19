@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'paginator-nav',
@@ -14,13 +14,11 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   ruta: string;
 
-  constructor(private activatedRoute: ActivatedRoute) {
-
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      console.log(params);
       let id = +params.get('id');
       let idGenero = +params.get('idGenero');
       let buscar = params.get('buscar');
@@ -36,7 +34,16 @@ export class PaginatorComponent implements OnInit, OnChanges {
         this.ruta = "/libros/buscar/" + buscar.replace("-", " ") + "/page";
       }
       else if(idEstanteria) {
-        this.ruta = "/libros/estanterias/" + idEstanteria + "/page/";
+        this.ruta = "/libros/estanterias/" + idEstanteria + "/page";
+      }
+      else if(this.router.url.startsWith("/explorar/autores")) {
+        this.ruta = "/explorar/autores/page";
+      }
+      else if(this.router.url.startsWith("/explorar/generos")) {
+        this.ruta = "/explorar/generos/page";
+      }
+      else if(this.router.url.startsWith("/explorar/lectores")) {
+        this.ruta = "/explorar/lectores/page";
       }
       else {
         this.ruta = "/libros/page";

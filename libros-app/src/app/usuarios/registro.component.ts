@@ -20,15 +20,6 @@ export class RegistroComponent implements OnInit {
   }
 
   create(): void {
-    /*let hoy = new Date();
-    this.usuario.ultimoAcceso = hoy.getFullYear() + "-" +
-      (hoy.getMonth() < 10 ? "0" : "") + hoy.getMonth() +
-      "-" + (hoy.getDay() < 10 ? "0" : "") + hoy.getDay() + " " +
-      (hoy.getHours() < 10 ? "0" : "") + hoy.getHours() + ":" +
-      (hoy.getMinutes() < 10 ? "0" : "") + hoy.getMinutes() +
-      ":" + (hoy.getSeconds() < 10 ? "0" : "") + hoy.getSeconds() + "." +
-      hoy.getMilliseconds();
-    this.usuario.accesoActual = this.usuario.ultimoAcceso;*/
     this.usuario.estanterias = [];
     this.usuario.roles = [];
     this.usuario.seguidos = [];
@@ -36,7 +27,6 @@ export class RegistroComponent implements OnInit {
 
     this.usuarioService.create(this.usuario).subscribe(
       response => {
-        console.log(response);
         this.router.navigate(['/login']);
         swal.fire(
           'Nuevo usuario',

@@ -4,7 +4,7 @@
   <div class="card-body text-primary">
     <h5 class="card-title">Explorar</h5>
 
-    <div class="container">
+    <div class="container" *ngIf="!isGeneros && !isAutores && !isLectores">
       <div class="row">
         <table class="table table-borderless col mx-1" *ngIf="generos">
           <thead class="thead-dark">
@@ -15,6 +15,9 @@
           <tbody>
             <tr *ngFor="let genero of generos">
               <th scope="row"><a [routerLink]="['/libros/generos', genero.id]">{{ genero.nombre }}</a></th>
+            </tr>
+            <tr *ngIf="generos.length == 10">
+              <th (click)="abrirGeneros()" scope="row" style="cursor: pointer;">...</th>
             </tr>
           </tbody>
         </table>
@@ -30,7 +33,7 @@
               <th scope="row"><a [routerLink]="['/autor', autor.id]">{{ autor.nombre }}</a></th>
             </tr>
             <tr *ngIf="autores.length == 10">
-              <th scope="row">...</th>
+              <th (click)="abrirAutores()" scope="row" style="cursor: pointer;">...</th>
             </tr>
           </tbody>
         </table>
@@ -49,11 +52,74 @@
             </tr>
             <tr *ngIf="usuarios.length == 10">
               <th scope="row"></th>
-              <th>...</th>
+              <th (click)="abrirLectores()" scope="row" style="cursor: pointer;">...</th>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="container" *ngIf="isGeneros">
+      <table class="table table-borderless col mx-1" *ngIf="generos">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Género</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let genero of generos">
+            <th scope="row"><a [routerLink]="['/libros/generos', genero.id]">{{ genero.nombre }}</a></th>
+          </tr>
+          <tr>
+            <th scope="row">
+              <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container" *ngIf="isAutores">
+      <table class="table table-borderless col mx-1" *ngIf="autores">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Autores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let autor of autores">
+            <th scope="row"><a [routerLink]="['/autor', autor.id]">{{ autor.nombre }}</a></th>
+          </tr>
+          <tr>
+            <th scope="row">
+              <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container" *ngIf="isLectores">
+      <table class="table table-borderless col mx-1" *ngIf="usuarios">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"></th>
+            <th>Lectores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <th scope="row"><img src="https://api.adorable.io/avatars/30/{{ usuario.id }}"  alt="" class="img-rounded"></th>
+            <th><a [routerLink]="['/perfil', usuario.id]">{{ usuario.nombre }} {{ usuario.apellidos }} - {{ usuario.username }}</a></th>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <th scope="row">
+              <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+            </th>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

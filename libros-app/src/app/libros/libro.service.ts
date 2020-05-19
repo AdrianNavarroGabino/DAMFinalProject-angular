@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LibroService {
   private urlEndPoint: string = 'http://localhost:8080/api/libros';
-  //private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router) { }
 
