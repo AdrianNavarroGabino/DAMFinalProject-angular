@@ -160,4 +160,22 @@ export class UsuarioService {
       })
     );
   }
+
+  actualizarUltimoAcceso(username: string): Observable<Usuario> {
+    return this.http.put<any>(this.urlEndPoint + '/ultimoacceso/' + username, null).pipe(
+      catchError(e => {
+
+        if(e.status == 400 && e.error.mensaje)
+        {
+          return throwError(e);
+        }
+
+        if(e.error.mensaje)
+        {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    )
+  }
 }

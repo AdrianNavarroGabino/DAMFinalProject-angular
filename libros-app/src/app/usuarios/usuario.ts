@@ -13,4 +13,5 @@ export class Usuario {
   estanterias: Estanteria[];
   roles: string[] = [];
   seguidos: Usuario[];
+  enabled: boolean;
 }

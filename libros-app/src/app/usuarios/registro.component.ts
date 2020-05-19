@@ -32,6 +32,7 @@ export class RegistroComponent implements OnInit {
     this.usuario.estanterias = [];
     this.usuario.roles = [];
     this.usuario.seguidos = [];
+    this.usuario.enabled = true;
 
     this.usuarioService.create(this.usuario).subscribe(
       response => {

@@ -3,6 +3,7 @@ import { Usuario } from './usuario';
 import swal from 'sweetalert2';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { UsuarioService } from './usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   titulo: string = 'Iniciar sesión';
   usuario: Usuario;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private usuarioService: UsuarioService, private router: Router) {
     this.usuario = new Usuario();
   }
 
@@ -36,15 +37,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.usuario).subscribe(response => {
-      console.log(response);
 
-      this.authService.guardarUsuario(response.access_token);
-      this.authService.guardarToken(response.access_token);
+      this.usuarioService.actualizarUltimoAcceso(this.usuario.username).subscribe(r => {
+        this.authService.guardarUsuario(response.access_token);
+        this.authService.guardarToken(response.access_token);
 
-      let usuario = this.authService.usuario;
+        let usuario = this.authService.usuario;
 
-      this.router.navigate(['/inicio']);
-      swal.fire('Login', 'Hola ' + usuario.username + ', has iniciado sesión con éxito', 'success');
+        this.router.navigate(['/inicio']);
+        swal.fire('Login', 'Hola ' + usuario.username + ', has iniciado sesión con éxito', 'success');
+      })
     }, err => {
       if(err.status == 400) {
         swal.fire('Error Login', 'Username o password incorrectos', 'error');
