@@ -38,7 +38,7 @@
           </td>
           <td style="width:40px;"><span (click)="abrirModal(libro)" style="cursor: pointer;" class="text-primary">{{libro.titulo}}</span></td>
           <td style="width:25%;"><span *ngIf="libro.autor"><a [routerLink]="['/autor', libro.autor.id]">{{libro.autor.nombre}}</a></span></td>
-          <td style="width:25%;"><span *ngFor="let g of libro.generos; first as isFirst"><span *ngIf="isFirst">{{ g.nombre }}</span><span *ngIf="!isFirst">, {{ g.nombre }}</span></span></td>
+          <td style="width:25%;"><span *ngFor="let g of libro.generos; first as isFirst"><a *ngIf="isFirst" [routerLink]="['/libros/generos', g.id]">{{ g.nombre }}</a><span style="cursor: pointer;" *ngIf="!isFirst">, <a [routerLink]="['/libros/generos', g.id]">{{ g.nombre }}</a></span></span></td>
           <td style="width:2%;">{{libro.anyoPublicacion}}</td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="editar" [routerLink]="['/libros/form', libro.id]" class="btn btn-primary  btn-sm">Editar</button>

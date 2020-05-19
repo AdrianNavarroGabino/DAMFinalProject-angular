@@ -1,4 +1,5 @@
 import { Estanteria } from './estanteria';
+import { Notificacion } from '../notificaciones/notificacion';
 
 export class Usuario {
   id: number;
@@ -14,4 +15,5 @@ export class Usuario {
   roles: string[] = [];
   seguidos: Usuario[];
   enabled: boolean;
+  notificaciones: Notificacion[];
 }

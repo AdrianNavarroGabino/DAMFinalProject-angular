@@ -70,6 +70,7 @@ export class PerfilComponent implements OnInit {
 
   seguir() {
     this.usuarioService.seguirUsuario(this.idUsuario, this.usuario).subscribe();
+    this.usuarioService.addNotificacion(this.id, this.authService.usuario.username + ' ha empezado a seguirte').subscribe();
     this.isSeguido = true;
   }
 

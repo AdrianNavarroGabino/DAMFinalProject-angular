@@ -1,6 +1,31 @@
 <div class="card border-primary mb-3">
   <div class="card-header">{{ titulo }}</div>
-  <div class="card-body text-primary">
-    <div class="p-3 mb-2 bg-secondary text-white text-center">No hay notificaciones nuevas</div>
+
+  <div class="card-body text-primary" *ngIf="!notificaciones || notificaciones.length == 0">
+    <div class="p-3 mb-2 bg-secondary text-white text-center">No hay notificaciones</div>
+  </div>
+
+  <div class="card-body text-primary" *ngIf="notificaciones?.length > 0">
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notificacion of notificaciones">
+          <div *ngIf="notificacion.leido">
+            <td style="width:100%;">{{ notificacion.notificacion }}</td>
+            <td style="width:10%;">{{ notificacion.fecha | date:"dd/MM/yyyy" }}</td>
+          </div>
+
+          <div *ngIf="!notificacion.leido">
+            <td class="bg-success" style="width:100%;">{{ notificacion.notificacion }}</td>
+            <td class="bg-success" style="width:10%;">{{ notificacion.fecha | date:"dd/MM/yyyy" }}</td>
+          </div>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -178,4 +178,40 @@ export class UsuarioService {
       })
     )
   }
+
+  marcarNotificacionesLeidas(id: number): Observable<Usuario> {
+    return this.http.put<any>(this.urlEndPoint + '/notificaciones/' + id, null).pipe(
+      catchError(e => {
+
+        if(e.status == 400 && e.error.mensaje)
+        {
+          return throwError(e);
+        }
+
+        if(e.error.mensaje)
+        {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    )
+  }
+
+  addNotificacion(id: number, notificacion: string): Observable<Usuario> {
+    return this.http.put<any>(this.urlEndPoint + '/notificaciones/nueva/' + id, notificacion).pipe(
+      catchError(e => {
+
+        if(e.status == 400 && e.error.mensaje)
+        {
+          return throwError(e);
+        }
+
+        if(e.error.mensaje)
+        {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    )
+  }
 }
