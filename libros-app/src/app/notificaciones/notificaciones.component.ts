@@ -12,14 +12,17 @@ export class NotificacionesComponent implements OnInit {
   titulo: string = "Notificaciones";
   notificaciones: Notificacion[] = [];
 
-  constructor(private authService: AuthService, private usuarioService: UsuarioService) {  }
+  constructor(private authService: AuthService,
+    private usuarioService: UsuarioService) {  }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuario(this.authService.usuario.id).subscribe(response => {
-      this.notificaciones = response.notificaciones as Notificacion[];
-      this.notificaciones.sort((a, b) => (a.id < b.id) ? 1 : -1);
-      this.usuarioService.marcarNotificacionesLeidas(this.authService.usuario.id).subscribe();
-    });
+    this.usuarioService.getUsuario(this.authService.usuario.id)
+      .subscribe(response => {
+        this.notificaciones = response.notificaciones as Notificacion[];
+        this.notificaciones.sort((a, b) => (a.id < b.id) ? 1 : -1);
+        this.usuarioService
+          .marcarNotificacionesLeidas(this.authService.usuario.id).subscribe();
+      });
   }
 
 }

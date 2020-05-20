@@ -1,4 +1,5 @@
-<detalle-libro *ngIf="libroSeleccionado" [libro]="libroSeleccionado"></detalle-libro>
+<detalle-libro *ngIf="libroSeleccionado" [libro]="libroSeleccionado">
+</detalle-libro>
 
 <div class="card border-primary mb-3">
   <div class="card-header">Libros</div>
@@ -6,13 +7,16 @@
     <h5 class="card-title">Listado de libros</h5>
 
     <div class="my-2 text-left" *ngIf="isAnyadirLibroAvailable">
-      <button *ngIf="authService.hasRole('ROLE_USER') || authService.hasRole('ROLE_ADMIN')"
-      class="btn btn-rounded btn-primary" type="button" [routerLink] = "['/clientes/form']">
+      <button
+      *ngIf="authService.hasRole('ROLE_USER') || authService.hasRole('ROLE_ADMIN')"
+      class="btn btn-rounded btn-primary" type="button"
+      [routerLink]="['/libros/form']">
         Añadir libro
       </button>
     </div>
 
-    <table class="table table-bordered table-striped table-responsive" *ngIf="libros?.length > 0">
+    <table class="table table-bordered table-striped table-responsive"
+    *ngIf="libros?.length > 0">
       <thead>
         <tr>
           <th scope="col" style="width:8%;">Portada</th>
@@ -21,7 +25,9 @@
           <th scope="col" style="width:25%;">Género</th>
           <th scope="col" style="width:2%;">Año de publicación</th>
           <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
-          <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
+          <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">
+            Eliminar
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -36,21 +42,40 @@
             alt="Sin foto" class="img-thumbnail rounded"
             style="width: 64px; cursor: pointer"/>
           </td>
-          <td style="width:40px;"><span (click)="abrirModal(libro)" style="cursor: pointer;" class="text-primary">{{libro.titulo}}</span></td>
-          <td style="width:25%;"><span *ngIf="libro.autor"><a [routerLink]="['/autor', libro.autor.id]">{{libro.autor.nombre}}</a></span></td>
-          <td style="width:25%;"><span *ngFor="let g of libro.generos; first as isFirst"><a *ngIf="isFirst" [routerLink]="['/libros/generos', g.id]">{{ g.nombre }}</a><span style="cursor: pointer;" *ngIf="!isFirst">, <a [routerLink]="['/libros/generos', g.id]">{{ g.nombre }}</a></span></span></td>
+          <td style="width:40px;"><span (click)="abrirModal(libro)"
+            style="cursor: pointer;" class="text-primary">
+              {{libro.titulo}}
+            </span>
+          </td>
+          <td style="width:25%;"><span *ngIf="libro.autor">
+            <a [routerLink]="['/autor', libro.autor.id]">
+              {{libro.autor.nombre}}
+            </a>
+          </span></td>
+          <td style="width:25%;">
+            <span *ngFor="let g of libro.generos; first as isFirst">
+              <a *ngIf="isFirst" [routerLink]="['/libros/generos', g.id]">
+                {{ g.nombre }}
+              </a>
+            <span style="cursor: pointer;" *ngIf="!isFirst">
+              , <a [routerLink]="['/libros/generos', g.id]">
+                {{ g.nombre }}</a></span></span></td>
           <td style="width:2%;">{{libro.anyoPublicacion}}</td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-            <button type="button" name="editar" [routerLink]="['/libros/form', libro.id]" class="btn btn-primary  btn-sm">Editar</button>
+            <button type="button" name="editar"
+            [routerLink]="['/libros/form', libro.id]"
+            class="btn btn-primary  btn-sm">Editar</button>
           </td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
-            <button type="button" name="eliminar" (click)='delete(libro)' class="btn btn-danger btn-sm">Eliminar</button>
+            <button type="button" name="eliminar" (click)='delete(libro)'
+            class="btn btn-danger btn-sm">Eliminar</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div *ngIf="!libros || libros.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+    <div *ngIf="!libros || libros.length == 0"
+    class="p-3 mb-2 bg-info text-white text-center">
         No hay resultados
     </div>
 

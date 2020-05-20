@@ -8,10 +8,14 @@
         </div>
         <div class="span4">
           <blockquote>
-            <p>Nombre: {{ usuario.nombre }}<br/>
-            Apellidos: {{ usuario.apellidos }}<br/>
-            Fecha de nacimiento: {{ usuario.fechaNacimiento | date:'dd/MM/yyyy' }}<br/>
-            Último acceso: {{ usuario.ultimoAcceso | date:'dd/MM/yyyy HH:mm' }}</p>
+            <p>Nombre: {{ usuario.nombre }}
+            <br/>
+            Apellidos: {{ usuario.apellidos }}
+            <br/>
+            Fecha de nacimiento: {{usuario.fechaNacimiento | date:'dd/MM/yyyy'}}
+            <br/>
+            Último acceso: {{ usuario.ultimoAcceso | date:'dd/MM/yyyy HH:mm' }}
+            </p>
           </blockquote>
           <p>
             Correo electrónico: {{ usuario.correo }}
@@ -19,10 +23,16 @@
         </div>
       </div>
       <div class="mx-4 my-2" *ngIf="availableSeguir && !isSeguido">
-        <button type="button" (click)="seguir()" class="btn btn-outline-success btn-lg">Seguir</button>
+        <button type="button" (click)="seguir()"
+        class="btn btn-outline-success btn-lg">
+          Seguir
+        </button>
       </div>
       <div class="mx-4 my-2" *ngIf="availableSeguir && isSeguido">
-        <button type="button" (click)="dejarDeSeguir()" class="btn btn-success btn-lg">Seguido</button>
+        <button type="button" (click)="dejarDeSeguir()"
+        class="btn btn-success btn-lg">
+          Seguido
+        </button>
       </div>
     </div>
 
@@ -34,13 +44,18 @@
         <li class="list-group-item">
           <a [routerLink]="['libros/estanterias/', estanteria.id]">
             <span>{{ estanteria.nombre }} - </span>
-            <span *ngIf="estanteria.libros.length != 1">{{ estanteria.libros.length }} libros</span>
-            <span *ngIf="estanteria.libros.length == 1">{{ estanteria.libros.length }} libro</span>
+            <span *ngIf="estanteria.libros.length != 1">
+              {{ estanteria.libros.length }} libros
+            </span>
+            <span *ngIf="estanteria.libros.length == 1">
+              {{ estanteria.libros.length }} libro
+            </span>
           </a>
         </li>
       </ul>
     </div>
-    <div *ngIf="!usuario.estanterias || usuario.estanterias.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+    <div *ngIf="!usuario.estanterias || usuario.estanterias.length == 0"
+    class="p-3 mb-2 bg-info text-white text-center">
         {{ noLibrerias }}
     </div>
 
@@ -51,11 +66,14 @@
     <div *ngIf="usuario.seguidos && usuario.seguidos.length > 0">
       <ul class="list-group" *ngFor="let seguido of usuario.seguidos">
         <li class="list-group-item">
-          <a [routerLink]="['/perfil', seguido.id]">{{ seguido.nombre }} {{ seguido.apellidos }} - {{ seguido.username }}</a>
+          <a [routerLink]="['/perfil', seguido.id]">
+            {{seguido.nombre}} {{seguido.apellidos}} - {{seguido.username}}
+          </a>
         </li>
       </ul>
     </div>
-    <div *ngIf="!usuario.seguidos || usuario.seguidos.length == 0" class="p-3 mb-2 bg-info text-white text-center">
+    <div *ngIf="!usuario.seguidos || usuario.seguidos.length == 0"
+    class="p-3 mb-2 bg-info text-white text-center">
         {{ noSeguidos }}
     </div>
 

@@ -45,22 +45,25 @@ export class LibrosComponent implements OnInit {
         });
       }
       else if(idGenero) {
-        this.libroService.getLibrosPorGenero(idGenero, page).subscribe(response => {
-          this.libros = response.content as Libro[];
-          this.paginador = response;
-        });
+        this.libroService.getLibrosPorGenero(idGenero, page)
+          .subscribe(response => {
+            this.libros = response.content as Libro[];
+            this.paginador = response;
+          });
       }
       else if(buscar && buscar.length > 0) {
-        this.libroService.buscarLibros(buscar.replace("-", " "), page).subscribe(response => {
-          this.libros = response.content as Libro[];
-          this.paginador = response;
-        })
+        this.libroService.buscarLibros(buscar.replace("-", " "), page)
+          .subscribe(response => {
+            this.libros = response.content as Libro[];
+            this.paginador = response;
+          })
       }
       else if(idEstanteria) {
-        this.libroService.getEstanteria(idEstanteria, page).subscribe(response => {
-          this.libros = response.content as Libro[];
-          this.paginador = response;
-        })
+        this.libroService.getEstanteria(idEstanteria, page)
+          .subscribe(response => {
+            this.libros = response.content as Libro[];
+            this.paginador = response;
+          })
       }
       else {
         this.isAnyadirLibroAvailable = true;
@@ -94,7 +97,7 @@ export class LibrosComponent implements OnInit {
       if (result.value) {
 
         this.libroService.delete(libro.id).subscribe(
-          response => {
+          () => {
             this.libros = this.libros.filter(li => li != libro)
             swal.fire(
               'Libro eliminado',

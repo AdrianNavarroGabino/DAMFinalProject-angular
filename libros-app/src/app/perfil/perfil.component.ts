@@ -52,22 +52,26 @@ export class PerfilComponent implements OnInit {
       this.imagePath = "https://api.adorable.io/avatars/150/" + this.usuario.id;
 
       if(this.id != this.idUsuario) {
-        this.usuarioService.getSeguido(this.idUsuario, this.id).subscribe(response => {
-          this.availableSeguir = true;
-          if(response != null) {
-            this.isSeguido = true;
-          }
-          else {
-            this.isSeguido = false;
-          }
-        });
+        this.usuarioService.getSeguido(this.idUsuario, this.id)
+          .subscribe(response => {
+            this.availableSeguir = true;
+            if(response != null) {
+              this.isSeguido = true;
+            }
+            else {
+              this.isSeguido = false;
+            }
+          });
       }
     });
   }
 
   seguir() {
     this.usuarioService.seguirUsuario(this.idUsuario, this.usuario).subscribe();
-    this.usuarioService.addNotificacion(this.id, this.authService.usuario.username + ' ha empezado a seguirte').subscribe();
+    this.usuarioService
+      .addNotificacion(this.id,
+        this.authService.usuario.username + ' ha empezado a seguirte')
+      .subscribe();
     this.isSeguido = true;
   }
 
@@ -91,7 +95,8 @@ export class PerfilComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.usuarioService.dejarDeSeguir(this.idUsuario, this.usuario).subscribe();
+        this.usuarioService.dejarDeSeguir(this.idUsuario, this.usuario)
+          .subscribe();
 
         this.isSeguido = false;
       }

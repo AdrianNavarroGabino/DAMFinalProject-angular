@@ -1,4 +1,3 @@
-
 <div class="card border-primary mb-3">
   <div class="card-header">Libros</div>
   <div class="card-body text-primary">
@@ -14,10 +13,17 @@
           </thead>
           <tbody>
             <tr *ngFor="let genero of generos">
-              <th scope="row"><a [routerLink]="['/libros/generos', genero.id]">{{ genero.nombre }}</a></th>
+              <th scope="row">
+                <a [routerLink]="['/libros/generos', genero.id]">
+                  {{ genero.nombre }}
+                </a>
+              </th>
             </tr>
             <tr *ngIf="generos.length == 10">
-              <th (click)="abrirGeneros()" scope="row" style="cursor: pointer;">...</th>
+              <th (click)="abrirGeneros()"
+              scope="row" style="cursor: pointer;">
+                ...
+              </th>
             </tr>
           </tbody>
         </table>
@@ -30,10 +36,17 @@
           </thead>
           <tbody>
             <tr *ngFor="let autor of autores">
-              <th scope="row"><a [routerLink]="['/autor', autor.id]">{{ autor.nombre }}</a></th>
+              <th scope="row">
+                <a [routerLink]="['/autor', autor.id]">
+                  {{ autor.nombre }}
+                </a>
+              </th>
             </tr>
             <tr *ngIf="autores.length == 10">
-              <th (click)="abrirAutores()" scope="row" style="cursor: pointer;">...</th>
+              <th (click)="abrirAutores()"
+              scope="row" style="cursor: pointer;">
+                ...
+              </th>
             </tr>
           </tbody>
         </table>
@@ -47,12 +60,20 @@
           </thead>
           <tbody>
             <tr *ngFor="let usuario of usuarios">
-              <th scope="row"><img src="https://api.adorable.io/avatars/30/{{ usuario.id }}"  alt="" class="img-rounded"></th>
-              <th><a [routerLink]="['/perfil', usuario.id]">{{ usuario.nombre }} {{ usuario.apellidos }} - {{ usuario.username }}</a></th>
+              <th scope="row">
+                <img src="https://api.adorable.io/avatars/30/{{ usuario.id }}"
+                alt="" class="img-rounded">
+              </th>
+              <th><a [routerLink]="['/perfil', usuario.id]">
+                {{usuario.nombre}} {{usuario.apellidos}} - {{usuario.username}}
+              </a></th>
             </tr>
             <tr *ngIf="usuarios.length == 10">
               <th scope="row"></th>
-              <th (click)="abrirLectores()" scope="row" style="cursor: pointer;">...</th>
+              <th (click)="abrirLectores()"
+              scope="row" style="cursor: pointer;">
+                ...
+              </th>
             </tr>
           </tbody>
         </table>
@@ -68,11 +89,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let genero of generos">
-            <th scope="row"><a [routerLink]="['/libros/generos', genero.id]">{{ genero.nombre }}</a></th>
+            <th scope="row">
+              <a [routerLink]="['/libros/generos', genero.id]">
+                {{ genero.nombre }}
+              </a>
+            </th>
           </tr>
           <tr>
             <th scope="row">
-              <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+              <paginator-nav *ngIf="paginador" [paginador]="paginador">
+              </paginator-nav>
             </th>
           </tr>
         </tbody>
@@ -88,11 +114,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let autor of autores">
-            <th scope="row"><a [routerLink]="['/autor', autor.id]">{{ autor.nombre }}</a></th>
+            <th scope="row">
+              <a [routerLink]="['/autor', autor.id]">
+                {{ autor.nombre }}
+              </a>
+            </th>
           </tr>
           <tr>
             <th scope="row">
-              <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+              <paginator-nav *ngIf="paginador" [paginador]="paginador">
+              </paginator-nav>
             </th>
           </tr>
         </tbody>
@@ -109,13 +140,18 @@
         </thead>
         <tbody>
           <tr *ngFor="let usuario of usuarios">
-            <th scope="row"><img src="https://api.adorable.io/avatars/30/{{ usuario.id }}"  alt="" class="img-rounded"></th>
-            <th><a [routerLink]="['/perfil', usuario.id]">{{ usuario.nombre }} {{ usuario.apellidos }} - {{ usuario.username }}</a></th>
+            <th scope="row">
+              <img src="https://api.adorable.io/avatars/30/{{ usuario.id }}"
+              alt="" class="img-rounded">
+            </th>
+            <th><a [routerLink]="['/perfil', usuario.id]">
+              {{usuario.nombre}} {{usuario.apellidos}} - {{usuario.username}}
+            </a></th>
           </tr>
           <tr>
-            <th scope="row"></th>
-            <th scope="row">
-              <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
+            <th scope="row" colspan="2">
+              <paginator-nav *ngIf="paginador" [paginador]="paginador">
+              </paginator-nav>
             </th>
           </tr>
         </tbody>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from './usuario';
-import { of, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Estanteria } from './estanteria';
@@ -47,171 +47,179 @@ export class UsuarioService {
   }
 
   getSeguido(idSeguidor: number, idSeguido: number): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.urlEndPoint}/${idSeguidor}/${idSeguido}`);
+    return this.http
+      .get<Usuario>(`${this.urlEndPoint}/${idSeguidor}/${idSeguido}`);
   }
 
-  getEstanteria(nombreEstanteria: string, idUsuario: number): Observable<Estanteria> {
-    return this.http.get<Estanteria>(this.urlEndPoint + '/' + idUsuario + '/estanterias/' + nombreEstanteria);
+  getEstanteria(
+    nombreEstanteria: string, idUsuario: number): Observable<Estanteria> {
+      return this.http.get<Estanteria>(this.urlEndPoint + '/' + idUsuario +
+        '/estanterias/' + nombreEstanteria);
   }
 
-  guardarEstanteria(nombreEstanteria: string, idUsuario: number): Observable<any> {
-    this.getEstanteria(nombreEstanteria, idUsuario).subscribe(response => {
-      let estanteriaBuscar = response as Estanteria;
+  guardarEstanteria(
+    nombreEstanteria: string, idUsuario: number): Observable<any> {
+      this.getEstanteria(nombreEstanteria, idUsuario).subscribe(response => {
+        let estanteriaBuscar = response as Estanteria;
 
-      if(estanteriaBuscar == null) {
-        const estanteria = new Estanteria();
-        estanteria.nombre = nombreEstanteria;
+        if(estanteriaBuscar == null) {
+          const estanteria = new Estanteria();
+          estanteria.nombre = nombreEstanteria;
 
-        return this.http.post<any>(this.urlEndPoint + '/estanterias', estanteria).pipe(
-          catchError(e => {
+          return this.http.post<any>(this.urlEndPoint + '/estanterias',
+            estanteria).pipe(
+              catchError(e => {
 
-            if(e.status == 400 && e.error.mensaje)
-            {
-             return throwError(e);
-            }
+                if(e.status == 400 && e.error.mensaje)
+                {
+                 return throwError(e);
+                }
 
-            if(e.error.mensaje)
-            {
-             console.error(e.error.mensaje);
-            }
-            return throwError(e);
-         })
+                if(e.error.mensaje)
+                {
+                 console.error(e.error.mensaje);
+                }
+                return throwError(e);
+             })
+          );
+        }
+      });
 
-        );
-      }
-    });
-
-    return null;
+      return null;
   }
 
   addEstanteria(nombreEstanteria: string, id: number): Observable<any> {
     const estanteria = new Estanteria();
     estanteria.nombre = nombreEstanteria;
 
-    return this.http.put<any>(this.urlEndPoint + '/' + id + '/estanterias', estanteria).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/' + id + '/estanterias',
+      estanteria).pipe(
+        catchError(e => {
 
-        if(e.status == 400 && e.error.mensaje)
-        {
-         return throwError(e);
-        }
+          if(e.status == 400 && e.error.mensaje)
+          {
+           return throwError(e);
+          }
 
-        if(e.error.mensaje)
-        {
-         console.error(e.error.mensaje);
-        }
-        return throwError(e);
-     })
-
+          if(e.error.mensaje)
+          {
+           console.error(e.error.mensaje);
+          }
+          return throwError(e);
+       })
     );
   }
 
   guardarLibroEstanteria(idEstanteria: number, libro: Libro): Observable<any> {
-    return this.http.put<any>(this.urlEndPoint + '/estanterias/' + idEstanteria, libro).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/estanterias/' + idEstanteria,
+      libro).pipe(
+        catchError(e => {
 
-        if(e.status == 400 && e.error.mensaje)
-        {
-         return throwError(e);
-        }
+          if(e.status == 400 && e.error.mensaje)
+          {
+           return throwError(e);
+          }
 
-        if(e.error.mensaje)
-        {
-         console.error(e.error.mensaje);
-        }
-        return throwError(e);
-     })
-
+          if(e.error.mensaje)
+          {
+           console.error(e.error.mensaje);
+          }
+          return throwError(e);
+       })
     );
   }
 
   seguirUsuario(idSeguidor: number, seguido: Usuario): Observable<Usuario> {
-    return this.http.put<any>(this.urlEndPoint + '/' + idSeguidor, seguido).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/' + idSeguidor, seguido)
+      .pipe(
+        catchError(e => {
+          if(e.status == 400 && e.error.mensaje)
+          {
+            return throwError(e);
+          }
 
-        if(e.status == 400 && e.error.mensaje)
-        {
+          if(e.error.mensaje)
+          {
+            console.error(e.error.mensaje);
+          }
           return throwError(e);
-        }
-
-        if(e.error.mensaje)
-        {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
+        })
     );
   }
 
   dejarDeSeguir(idSeguidor: number, seguido: Usuario): Observable<Usuario> {
-    return this.http.put<any>(this.urlEndPoint + '/unfollow/' + idSeguidor, seguido).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/unfollow/' + idSeguidor,
+      seguido).pipe(
+        catchError(e => {
 
-        if(e.status == 400 && e.error.mensaje)
-        {
+          if(e.status == 400 && e.error.mensaje)
+          {
+            return throwError(e);
+          }
+
+          if(e.error.mensaje)
+          {
+            console.error(e.error.mensaje);
+          }
           return throwError(e);
-        }
-
-        if(e.error.mensaje)
-        {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
+        })
     );
   }
 
   actualizarUltimoAcceso(username: string): Observable<Usuario> {
-    return this.http.put<any>(this.urlEndPoint + '/ultimoacceso/' + username, null).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/ultimoacceso/' + username,
+      null).pipe(
+        catchError(e => {
 
-        if(e.status == 400 && e.error.mensaje)
-        {
+          if(e.status == 400 && e.error.mensaje)
+          {
+            return throwError(e);
+          }
+
+          if(e.error.mensaje)
+          {
+            console.error(e.error.mensaje);
+          }
           return throwError(e);
-        }
-
-        if(e.error.mensaje)
-        {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
-    )
+        })
+    );
   }
 
   marcarNotificacionesLeidas(id: number): Observable<Usuario> {
-    return this.http.put<any>(this.urlEndPoint + '/notificaciones/' + id, null).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/notificaciones/' + id, null)
+      .pipe(
+        catchError(e => {
 
-        if(e.status == 400 && e.error.mensaje)
-        {
+          if(e.status == 400 && e.error.mensaje)
+          {
+            return throwError(e);
+          }
+
+          if(e.error.mensaje)
+          {
+            console.error(e.error.mensaje);
+          }
           return throwError(e);
-        }
-
-        if(e.error.mensaje)
-        {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
-    )
+        })
+    );
   }
 
   addNotificacion(id: number, notificacion: string): Observable<Usuario> {
-    return this.http.put<any>(this.urlEndPoint + '/notificaciones/nueva/' + id, notificacion).pipe(
-      catchError(e => {
+    return this.http.put<any>(this.urlEndPoint + '/notificaciones/nueva/' + id,
+      notificacion).pipe(
+        catchError(e => {
 
-        if(e.status == 400 && e.error.mensaje)
-        {
+          if(e.status == 400 && e.error.mensaje)
+          {
+            return throwError(e);
+          }
+
+          if(e.error.mensaje)
+          {
+            console.error(e.error.mensaje);
+          }
           return throwError(e);
-        }
-
-        if(e.error.mensaje)
-        {
-          console.error(e.error.mensaje);
-        }
-        return throwError(e);
-      })
-    )
+        })
+    );
   }
 }

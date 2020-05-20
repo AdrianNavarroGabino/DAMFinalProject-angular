@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'perfil/:id', component: PerfilComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'usuarios', component: UsuariosComponent},
-  {path: 'libros/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'libros/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'libros/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: RegistroComponent},

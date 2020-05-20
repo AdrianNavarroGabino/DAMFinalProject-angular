@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Libro } from '../libros/libro';
 import { LibroService } from '../libros/libro.service';
-import { ActivatedRoute } from '@angular/router';
 import { ModalService } from '../libros/detalle/modal.service';
 import { AuthService } from '../usuarios/auth.service';
 
@@ -15,7 +14,6 @@ export class InicioComponent implements OnInit {
   libroSeleccionado: Libro;
 
   constructor(private libroService: LibroService,
-    private activatedRoute: ActivatedRoute,
     private modalService: ModalService,
     public authService: AuthService) { }
 

@@ -63,8 +63,10 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   private initPaginator(): void {
-    this.desde = Math.min(Math.max(1, this.paginador.number - 2), this.paginador.totalPages - 5);
-    this.hasta = Math.max(Math.min(this.paginador.totalPages, this.paginador.number + 3), 6);
+    this.desde = Math.min(Math.max(1, this.paginador.number - 2),
+      this.paginador.totalPages - 5);
+    this.hasta = Math.max(Math.min(this.paginador.totalPages,
+      this.paginador.number + 3), 6);
 
     if(this.paginador.totalPages > 5)
     {

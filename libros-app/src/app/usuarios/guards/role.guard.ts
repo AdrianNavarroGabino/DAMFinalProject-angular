@@ -26,14 +26,16 @@ export class RoleGuard implements CanActivate {
       }
 
       let role = next.data['role'] as string;
-      console.log(role);
 
       if(this.authService.hasRole(role))
       {
         return true;
       }
 
-      swal.fire('Acceso denegado', `Hola ${this.authService.usuario.username} no tienes acceso a este recurso`, 'warning');
+      swal.fire(
+        'Acceso denegado',
+        `Hola ${this.authService.usuario.username} no tienes acceso a este recurso`,
+        'warning');
       this.router.navigate(['/libros']);
       return false;
   }

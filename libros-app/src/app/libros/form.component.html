@@ -5,8 +5,10 @@
       <div class="form-group row">
         <label for="titulo" class="col-form-label col-sm-2">Título</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.titulo" name="titulo" required #titulo="ngModel">
-          <div class="alert alert-danger" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+          <input type="text" class="form-control" [(ngModel)]="libro.titulo"
+          name="titulo" required #titulo="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
             <div *ngIf="titulo.errors.required">
               Introduce un título
             </div>
@@ -14,47 +16,84 @@
         </div>
       </div>
 
-      <!--<div class="form-group row">
-        <label for="isbn10" class="col-form-label col-sm-2">ISBN 10</label>
+      <div class="form-group row">
+        <label for="autor" class="col-form-label col-sm-2">Autor</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.isbn10" name="isbn10" pattern="(^[0-9]{10}$)|(^[0-9]{1}[- ][0-9]{4}[- ][0-9]{4}[- ][0-9]{1}$)" #isbn10="ngModel">
-          <div class="alert alert-danger" *ngIf="isbn10.invalid && (isbn10.dirty || isbn10.touched)">
-            <div *ngIf="isbn10.errors.pattern">
-              Introduce un ISBN 10 válido
+          <input type="text" class="form-control"
+          [(ngModel)]="autorSeleccionado" name="autor"
+          required #autor="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="autor.invalid && (autor.dirty || autor.touched)">
+            <div *ngIf="autor.errors.required">
+              Introduce un autor
             </div>
           </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="isbn13" class="col-form-label col-sm-2">ISBN13</label>
+        <label for="idioma" class="col-form-label col-sm-2">Idioma</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.isbn13" name="isbn13"  pattern="(^[0-9]{13}$)|(^[0-9]{3}[- ][0-9]{1}[- ][0-9]{2}[- ][0-9]{6}[- ][0-9]{1}$)" #isbn13="ngModel">
-          <div class="alert alert-danger" *ngIf="isbn13.invalid && (isbn13.dirty || isbn13.touched)">
-            <div *ngIf="isbn13.errors.pattern">
-              Introduce un ISBN 13 válido
+          <input type="text" class="form-control" [(ngModel)]="libro.idioma"
+          name="idioma" required #idioma="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="idioma.invalid && (idioma.dirty || idioma.touched)">
+            <div *ngIf="idioma.errors.required">
+              Introduce un idioma
             </div>
           </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="editorial" class="col-form-label col-sm-2">Editorial</label>
+        <label for="generos" class="col-form-label col-sm-2">Género</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="libro.editorial" name="editorial">
+          <select class="form-control" name="generos" id="generos"
+          [(ngModel)]="generoSeleccionado">
+            <option *ngFor="let g of generos" [value]="g.id">
+              {{ g.nombre }}
+            </option>
+          </select>
         </div>
-      </div>-->
+      </div>
 
       <div class="form-group row">
-        <label for="anyoPublicacion" class="col-form-label col-sm-2">Año de publicación</label>
+        <label for="paginas" class="col-form-label col-sm-2">Páginas</label>
         <div class="col-sm-6">
-          <input type="date" class="form-control" [(ngModel)]="libro.anyoPublicacion" name="anyoPublicacion">
+          <input type="number" class="form-control" [(ngModel)]="libro.paginas"
+          name="paginas" required #paginas="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="paginas.invalid && (paginas.dirty || paginas.touched)">
+            <div *ngIf="paginas.errors.required">
+              Introduce el número de páginas
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="anyoPublicacion" class="col-form-label col-sm-2">
+          Año de publicación
+        </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control"
+          [(ngModel)]="libro.anyoPublicacion" name="anyoPublicacion" required
+          #anyoPublicacion="ngModel">
+          <div class="alert alert-danger"
+          *ngIf="anyoPublicacion.invalid && (anyoPublicacion.dirty || anyoPublicacion.touched)">
+            <div *ngIf="anyoPublicacion.errors.required">
+              Introduce el año de publicación
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="form-group row mx-1 py-2">
         <div clas="col-sm-6">
-          <button class="btn btn-primary" role="button" [disabled]="!libroForm.form.valid">Añadir libro</button>
+          <button class="btn btn-primary" role="button"
+          [disabled]="!libroForm.form.valid">
+            {{ textoBoton }}
+          </button>
         </div>
       </div>
     </form>

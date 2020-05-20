@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Libro } from './libro';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -93,17 +93,5 @@ export class LibroService {
         return throwError(e);
       })
     );
-  }
-
-  subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
-    let formData = new FormData();
-    formData.append("archivo", archivo);
-    formData.append("id", id);
-
-    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
-      reportProgress: true
-    });
-
-    return this.http.request(req);
   }
 }

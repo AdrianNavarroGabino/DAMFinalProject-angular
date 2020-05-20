@@ -3,7 +3,6 @@ import { Genero } from '../libros/genero';
 import { GeneroService } from '../libros/genero.service';
 import { Usuario } from '../usuarios/usuario';
 import { UsuarioService } from '../usuarios/usuario.service';
-import { AuthService } from '../usuarios/auth.service';
 import { Autor } from '../libros/autor';
 import { AutorService } from '../libros/autor.service';
 import { Router, ActivatedRoute } from '@angular/router';

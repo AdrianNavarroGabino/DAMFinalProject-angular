@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from './usuario';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UsuarioService } from './usuario.service';
 import swal from 'sweetalert2';
 
@@ -13,8 +13,9 @@ export class RegistroComponent implements OnInit {
   public tituloForm: String = "Registro";
   private errores: string[];
 
-  constructor(private usuarioService: UsuarioService, private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }

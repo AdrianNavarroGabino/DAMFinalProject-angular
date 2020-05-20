@@ -4,7 +4,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">{{ titulo }}</h5>
-          <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button (click)="cerrarModal()" type="button" class="close"
+          data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -13,30 +14,47 @@
           <div class="container">
             <div class="row">
               <div class="col-sm" *ngIf="libro?.idFoto">
-                <img src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg" alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded" />
+                <img
+                src="https://www.ebookelo.com/images/cover/{{libro.idFoto}}.jpg"
+                alt="Portada de {{libro.titulo}}"
+                class="img-thumbnail rounded" />
               </div>
               <div class="col-sm" *ngIf="!libro?.idFoto">
-                <img src="http://localhost:8080/images/no-portada.png" alt="No portada" class="img-thumbnail rounded" />
+                <img src="http://localhost:8080/images/no-portada.png"
+                alt="No portada" class="img-thumbnail rounded" />
               </div>
 
               <div class="col-sm">
                 <ul class="list-group text-dark mb-3" *ngIf="libro">
-                  <li class="list-group-item list-group-item-primary">Título: {{ libro.titulo }}</li>
-                  <li *ngIf="libro.autor" class="list-group-item list-group-item-secondary">Autor: <a [routerLink]="['/autor', libro.autor.id]">{{libro.autor.nombre}}</a></li>
-                  <li *ngIf="libro.idioma" class="list-group-item">Idioma: {{libro.idioma}}</li>
-                  <li *ngIf="libro.anyoPublicacion" class="list-group-item">Año de publicación: {{ libro.anyoPublicacion }}</li>
-                  <li *ngIf="libro.paginas" class="list-group-item">Páginas: {{libro.paginas}}</li>
-                  <li *ngIf="libro.valoracion" class="list-group-item">Valoración: {{libro.valoracion}} sobre 10</li>
-                  <li *ngIf="libro.generos && libro.generos.length > 0" class="list-group-item">
-                    Género: <span *ngFor="let g of libro.generos; first as isFirst"><span *ngIf="isFirst">{{ g.nombre }}</span><span *ngIf="!isFirst">, {{ g.nombre }}</span></span>
+                  <li class="list-group-item list-group-item-primary">
+                    Título: {{ libro.titulo }}
+                  </li>
+                  <li *ngIf="libro.autor"
+                  class="list-group-item list-group-item-secondary">
+                    Autor: <a
+                    [routerLink]="['/autor', libro.autor.id]">
+                    {{libro.autor.nombre}}</a>
+                  </li>
+                  <li *ngIf="libro.idioma" class="list-group-item">
+                    Idioma: {{libro.idioma}}
+                  </li>
+                  <li *ngIf="libro.anyoPublicacion" class="list-group-item">
+                    Año de publicación: {{ libro.anyoPublicacion }}
+                  </li>
+                  <li *ngIf="libro.paginas" class="list-group-item">
+                    Páginas: {{libro.paginas}}
+                  </li>
+                  <li *ngIf="libro.valoracion" class="list-group-item">
+                    Valoración: {{libro.valoracion}} sobre 10
+                  </li>
+                  <li *ngIf="libro.generos && libro.generos.length > 0"
+                  class="list-group-item">
+                    Género: <span
+                    *ngFor="let g of libro.generos; first as isFirst">
+                      <span *ngIf="isFirst">{{ g.nombre }}</span>
+                      <span *ngIf="!isFirst">, {{ g.nombre }}</span></span>
                   </li>
                 </ul>
-
-                <div *ngIf="progreso > 0" class="progress" style="height: 40px;">
-                  <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width: progreso+'%'}" attr.aria-valuenow="{{ progreso }}" aria-valuemin="0" aria-valuemax="100">
-                    {{ progreso }}%
-                  </div>
-                </div>
 
               </div>
             </div>
@@ -44,8 +62,15 @@
 
         </div>
         <div class="modal-footer">
-          <button *ngIf="authService.hasRole('ROLE_USER')" type="button" (click)="abrirModalAnyadir()" class="btn btn-success mr-auto" data-dismiss="modal">Añadir a mi estantería</button>
-          <button type="button" (click)="cerrarModal()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button *ngIf="authService.hasRole('ROLE_USER')" type="button"
+          (click)="abrirModalAnyadir()" class="btn btn-success mr-auto"
+          data-dismiss="modal">
+            Añadir a mi estantería
+          </button>
+          <button type="button" (click)="cerrarModal()"
+          class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
@@ -60,7 +85,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">{{ tituloAnyadir }}</h5>
-          <button (click)="cerrarModalAnyadir()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button (click)="cerrarModalAnyadir()" type="button" class="close"
+          data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -70,18 +96,33 @@
             <div class="row">
               <div class="col-sm">
                 <ul class="list-group text-dark mb-3" *ngIf="libro">
-                  <li class="list-group-item list-group-item-primary">Elige estanteria</li>
+                  <li class="list-group-item list-group-item-primary">
+                    Elige estanteria
+                  </li>
                   <div *ngIf="usuario">
-                    <div *ngIf="usuario.estanterias && usuario.estanterias.length > 0">
-                      <li *ngFor="let estanteria of usuario.estanterias" class="list-group-item">
-                        <span (click)="anyadirLibro(estanteria.id)" style="cursor: pointer;">{{ estanteria.nombre }}</span>
+                    <div
+                    *ngIf="usuario.estanterias && usuario.estanterias.length>0">
+                      <li
+                      *ngFor="let estanteria of usuario.estanterias"
+                      class="list-group-item">
+                        <span
+                        (click)="anyadirLibro(estanteria.id, estanteria.nombre)"
+                        style="cursor: pointer;">
+                          {{ estanteria.nombre }}
+                        </span>
                       </li>
                     </div>
 
                     <li class="list-group-item">
                       <form class="form-inline">
-                        <input type="text" class="form-control w-70" [(ngModel)]="nuevaEstanteria" name="nuevaEstanteria" required>
-                        <button type="button" (click)="crearEstanteria(libro)" class="btn btn-success mx-3" data-dismiss="modal" [disabled]='nuevaEstanteria == ""'>Crear</button>
+                        <input type="text" class="form-control w-70"
+                        [(ngModel)]="nuevaEstanteria" name="nuevaEstanteria"
+                        required>
+                        <button type="button" (click)="crearEstanteria(libro)"
+                        class="btn btn-success mx-3" data-dismiss="modal"
+                        [disabled]='nuevaEstanteria == ""'>
+                          Crear
+                        </button>
                       </form>
                     </li>
                   </div>
@@ -92,7 +133,10 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" (click)="cerrarModalAnyadir()" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" (click)="cerrarModalAnyadir()"
+          class="btn btn-secondary" data-dismiss="modal">
+            Cerrar
+          </button>
         </div>
       </div>
     </div>

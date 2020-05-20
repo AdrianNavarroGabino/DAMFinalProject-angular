@@ -1,12 +1,15 @@
-<detalle-libro *ngIf="libroSeleccionado" [libro]="libroSeleccionado"></detalle-libro>
+<detalle-libro *ngIf="libroSeleccionado" [libro]="libroSeleccionado">
+</detalle-libro>
 
 <div class="card border-primary mb-3">
   <div class="card-header">Inicio</div>
   <div class="card-body text-primary">
-    <button type="button" (click)="getLibros()" class="btn btn-primary float-right" name="actualizar">Actualizar</button>
+    <button type="button" (click)="getLibros()"
+    class="btn btn-primary float-right" name="actualizar">Actualizar</button>
     <h5 class="card-title">Qué leer</h5>
 
-    <div class="card-deck card-group d-inline-flex col-2 p-2 m-2" *ngFor="let libro of libros">
+    <div class="card-deck card-group d-inline-flex col-2 p-2 m-2"
+    *ngFor="let libro of libros">
       <div class="card">
         <div class="card-img-top text-center" *ngIf="libro?.idFoto">
           <img (click)="abrirModal(libro)"
@@ -21,10 +24,15 @@
           style="width: 300px; cursor: pointer"/>
         </div>
         <div class="card-body text-wrap">
-          <h5 class="card-title" (click)="abrirModal(libro)" style="cursor: pointer;">{{libro.titulo}}</h5>
+          <h5 class="card-title" (click)="abrirModal(libro)"
+          style="cursor: pointer;">{{libro.titulo}}</h5>
         </div>
         <div class="card-footer">
-          <p class="text-muted responsive" style="width: 300px;"><a [routerLink]="['/autor', libro.autor.id]">{{libro.autor.nombre}}</a></p>
+          <p class="text-muted responsive" style="width: 300px;">
+            <a [routerLink]="['/autor', libro.autor.id]">
+              {{libro.autor.nombre}}
+            </a>
+          </p>
         </div>
       </div>
     </div>
