@@ -29,12 +29,12 @@ export class PerfilComponent implements OnInit {
       this.id = params['id'];
       if(!this.id) {
         this.id = this.authService.usuario.id;
-        this.noLibrerias = "Aún no has añadido librerías";
+        this.noLibrerias = "Aún no has añadido estanterías";
         this.noSeguidos = "Aún no sigues a nadie";
         this.availableSeguir = false;
       }
       else if(this.id && this.id != this.idUsuario) {
-        this.noLibrerias = "Aún no ha añadido librerías";
+        this.noLibrerias = "Aún no ha añadido estanterías";
         this.noSeguidos = "Aún no sigue a nadie";
         this.availableSeguir = true;
       }
