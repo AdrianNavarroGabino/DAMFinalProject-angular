@@ -12,6 +12,7 @@ export class InicioComponent implements OnInit {
 
   libros: Libro[];
   libroSeleccionado: Libro;
+  anchoImagen: number = window.outerWidth * 300 / 2560;
 
   constructor(private libroService: LibroService,
     private modalService: ModalService,

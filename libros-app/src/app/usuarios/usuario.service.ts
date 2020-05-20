@@ -60,9 +60,7 @@ export class UsuarioService {
   guardarEstanteria(
     nombreEstanteria: string, idUsuario: number): Observable<any> {
       this.getEstanteria(nombreEstanteria, idUsuario).subscribe(response => {
-        let estanteriaBuscar = response as Estanteria;
-
-        if(estanteriaBuscar == null) {
+        if(response == null) {
           const estanteria = new Estanteria();
           estanteria.nombre = nombreEstanteria;
 

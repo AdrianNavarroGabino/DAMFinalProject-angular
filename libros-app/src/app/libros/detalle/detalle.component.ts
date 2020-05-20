@@ -19,6 +19,7 @@ export class DetalleComponent implements OnInit {
   tituloAnyadir: string = "Guardar libro"
   usuario: Usuario;
   nuevaEstanteria: string = "";
+  anchoImagen: number = 350 * window.outerWidth / 2300;
 
   constructor(private usuarioService: UsuarioService,
     public libroService: LibroService,
@@ -50,35 +51,25 @@ export class DetalleComponent implements OnInit {
   }
 
   crearEstanteria(libro: Libro) {
-    this.usuarioService.guardarEstanteria(this.nuevaEstanteria, this.usuario.id)
-      .subscribe(response => {
-        this.nuevaEstanteria = "";
+    let existe: boolean = false;
 
-        let estanteria: Estanteria;
-        if(response != null) {
-          estanteria = response as Estanteria;
-        }
-        else {
-          this.usuarioService
-            .getEstanteria(this.nuevaEstanteria, this.usuario.id)
-            .subscribe(r => {
-              estanteria = r as Estanteria;
-            });
-        }
+    this.usuario.estanterias.forEach(e => {
+      if(e.nombre == this.nuevaEstanteria) {
+        this.anyadirLibro(e.id, e.nombre);
+        existe = true;
+      }
+    });
+    console.log(this.nuevaEstanteria);
 
-        this.usuarioService.addEstanteria(this.nuevaEstanteria, this.usuario.id)
-          .subscribe();
-
-        this.usuarioService.guardarLibroEstanteria(estanteria.id, libro)
-          .subscribe(() => {
-            swal.fire(
-              'Libro añadido',
-              `Libro ${this.libro.titulo} añadido a la estantería ${estanteria.nombre}`,
-              'success');
-
-            this.cerrarModalAnyadir();
-          });
-      });
+    if(!existe) {
+      this.usuarioService.addEstanteria(this.nuevaEstanteria, this.usuario.id)
+        .subscribe(usuario => {
+          this.anyadirLibro(
+            usuario.estanterias[usuario.estanterias.length - 1].id,
+            usuario.estanterias[usuario.estanterias.length - 1].nombre);
+          this.usuario = usuario;
+        });
+    }
   }
 
   anyadirLibro(idEstanteria: number, estanteriaNombre: string) {

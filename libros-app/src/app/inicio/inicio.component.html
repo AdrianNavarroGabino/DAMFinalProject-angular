@@ -15,20 +15,22 @@
           <img (click)="abrirModal(libro)"
           src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg"
           alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded"
-          style="width: 300px; cursor: pointer"/>
+          style="cursor: pointer"
+          [ngStyle]="{'width.px': anchoImagen}"/>
         </div>
         <div class="card-img-top text-center" *ngIf="!libro?.idFoto">
           <img (click)="abrirModal(libro)"
           src="http://localhost:8080/images/no-portada.png"
           alt="No portada" class="img-thumbnail rounded"
-          style="width: 300px; cursor: pointer"/>
+          style="cursor: pointer"
+          [ngStyle]="{'width.px': anchoImagen}"/>
         </div>
         <div class="card-body text-wrap">
           <h5 class="card-title" (click)="abrirModal(libro)"
           style="cursor: pointer;">{{libro.titulo}}</h5>
         </div>
         <div class="card-footer">
-          <p class="text-muted responsive" style="width: 300px;">
+          <p class="text-muted text-wrap">
             <a [routerLink]="['/autor', libro.autor.id]">
               {{libro.autor.nombre}}
             </a>

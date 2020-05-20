@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   titulo: string = 'Iniciar sesión';
   usuario: Usuario;
+  anchoLogin: number = window.outerWidth / 2;
 
   constructor(
     private authService: AuthService,

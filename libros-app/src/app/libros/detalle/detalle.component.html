@@ -17,10 +17,12 @@
                 <img
                 src="https://www.ebookelo.com/images/cover/{{libro.idFoto}}.jpg"
                 alt="Portada de {{libro.titulo}}"
+                [ngStyle]="{'width.px': anchoImagen}"
                 class="img-thumbnail rounded" />
               </div>
               <div class="col-sm" *ngIf="!libro?.idFoto">
                 <img src="http://localhost:8080/images/no-portada.png"
+                [ngStyle]="{'width.px': anchoImagen}"
                 alt="No portada" class="img-thumbnail rounded" />
               </div>
 
