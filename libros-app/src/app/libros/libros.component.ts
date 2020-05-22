@@ -17,6 +17,7 @@ export class LibrosComponent implements OnInit {
   paginador: any;
   libroSeleccionado: Libro;
   isAnyadirLibroAvailable: boolean = false;
+  movil: boolean = false;
 
   constructor(private libroService: LibroService,
     private autorService: AutorService,
@@ -25,6 +26,10 @@ export class LibrosComponent implements OnInit {
     public authService: AuthService) { }
 
   ngOnInit(): void {
+
+    if(window.outerWidth <= 425) {
+      this.movil = true;
+    }
 
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');

@@ -22,8 +22,8 @@
           <th scope="col" style="width:8%;">Portada</th>
           <th scope="col" style="width:40%;">Título</th>
           <th scope="col" style="width:25%;">Autor</th>
-          <th scope="col" style="width:25%;">Género</th>
-          <th scope="col" style="width:2%;">Año de publicación</th>
+          <th scope="col" style="width:25%;" *ngIf="!movil">Género</th>
+          <th scope="col" style="width:2%;" *ngIf="!movil">Año de publicación</th>
           <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
           <th scope="col" *ngIf="authService.hasRole('ROLE_ADMIN')">
             Eliminar
@@ -52,7 +52,7 @@
               {{libro.autor.nombre}}
             </a>
           </span></td>
-          <td style="width:25%;">
+          <td style="width:25%;" *ngIf="!movil">
             <span *ngFor="let g of libro.generos; first as isFirst">
               <a *ngIf="isFirst" [routerLink]="['/libros/generos', g.id]">
                 {{ g.nombre }}
@@ -60,7 +60,7 @@
             <span style="cursor: pointer;" *ngIf="!isFirst">
               , <a [routerLink]="['/libros/generos', g.id]">
                 {{ g.nombre }}</a></span></span></td>
-          <td style="width:2%;">{{libro.anyoPublicacion}}</td>
+          <td style="width:2%;" *ngIf="!movil">{{libro.anyoPublicacion}}</td>
           <td *ngIf="authService.hasRole('ROLE_ADMIN')">
             <button type="button" name="editar"
             [routerLink]="['/libros/form', libro.id]"

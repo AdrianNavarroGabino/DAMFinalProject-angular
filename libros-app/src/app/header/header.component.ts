@@ -25,12 +25,20 @@ export class HeaderComponent implements OnInit {
       'success');
     this.authService.logout();
     this.router.navigate(['/login']);
+    this.cerrarToggler();
   }
 
   realizarConsulta() {
     if(this.buscar != "") {
       this.router.navigate(['/libros/buscar/' + this.buscar.replace(" ", "-")]);
       this.buscar = "";
+      this.cerrarToggler();
     }
+  }
+
+  cerrarToggler() {
+    document.getElementById('navButton').setAttribute('aria-expanded', 'false');
+    document.getElementById('navButton').classList.add('collapsed');
+    document.getElementById('navbarTogglerDemo02').classList.remove('show');
   }
 }

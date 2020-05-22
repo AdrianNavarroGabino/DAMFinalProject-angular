@@ -13,12 +13,17 @@ export class InicioComponent implements OnInit {
   libros: Libro[];
   libroSeleccionado: Libro;
   anchoImagen: number = window.outerWidth * 300 / 2560;
+  movil: boolean = false;
 
   constructor(private libroService: LibroService,
     private modalService: ModalService,
     public authService: AuthService) { }
 
   ngOnInit(): void {
+    if(window.outerWidth <= 425) {
+      this.movil = true;
+      this.anchoImagen = window.outerWidth * 0.7;
+    }
     this.getLibros()
   }
 

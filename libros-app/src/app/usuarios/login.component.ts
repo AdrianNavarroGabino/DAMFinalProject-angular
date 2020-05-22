@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(window.outerWidth <= 425) {
+      this.anchoLogin = window.outerWidth * 0.7;
+    }
+
     if(this.authService.isAuthenticated())
     {
       swal.fire('Login', 'Hola ' + this.authService.usuario.username +

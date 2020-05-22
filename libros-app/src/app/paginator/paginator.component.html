@@ -13,7 +13,7 @@
     <span class="page-link" *ngIf="pagina - 1 == paginador.number">
       {{ pagina }}
     </span>
-    <a class="page-link" *ngIf="pagina - 1 != paginador.number"
+    <a class="page-link" *ngIf="pagina - 1 != paginador.number && !movil"
     [routerLink]="[ruta, pagina - 1]">
       {{ pagina }}
     </a>

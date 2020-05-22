@@ -8,33 +8,68 @@
     class="btn btn-primary float-right" name="actualizar">Actualizar</button>
     <h5 class="card-title">Qué leer</h5>
 
-    <div class="card-deck card-group d-inline-flex col-2 p-2 m-2"
-    *ngFor="let libro of libros">
-      <div class="card">
-        <div class="card-img-top text-center" *ngIf="libro?.idFoto">
-          <img (click)="abrirModal(libro)"
-          src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg"
-          alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded"
-          style="cursor: pointer"
-          [ngStyle]="{'width.px': anchoImagen}"/>
+    <div *ngIf="libros?.length > 0 && !movil">
+      <div class="card-deck card-group d-inline-flex col-5 p-2 m-2"
+      *ngFor="let libro of libros">
+        <div class="card">
+          <div class="card-img-top text-center" *ngIf="libro?.idFoto">
+            <img (click)="abrirModal(libro)"
+            src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg"
+            alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded"
+            style="cursor: pointer"
+            [ngStyle]="{'width.px': anchoImagen}"/>
+          </div>
+          <div class="card-img-top text-center" *ngIf="!libro?.idFoto">
+            <img (click)="abrirModal(libro)"
+            src="http://localhost:8080/images/no-portada.png"
+            alt="No portada" class="img-thumbnail rounded"
+            style="cursor: pointer"
+            [ngStyle]="{'width.px': anchoImagen}"/>
+          </div>
+          <div class="card-body text-wrap">
+            <h5 class="card-title" (click)="abrirModal(libro)"
+            style="cursor: pointer;">{{libro.titulo}}</h5>
+          </div>
+          <div class="card-footer">
+            <p class="text-muted text-wrap">
+              <a [routerLink]="['/autor', libro.autor.id]">
+                {{libro.autor.nombre}}
+              </a>
+            </p>
+          </div>
         </div>
-        <div class="card-img-top text-center" *ngIf="!libro?.idFoto">
-          <img (click)="abrirModal(libro)"
-          src="http://localhost:8080/images/no-portada.png"
-          alt="No portada" class="img-thumbnail rounded"
-          style="cursor: pointer"
-          [ngStyle]="{'width.px': anchoImagen}"/>
-        </div>
-        <div class="card-body text-wrap">
-          <h5 class="card-title" (click)="abrirModal(libro)"
-          style="cursor: pointer;">{{libro.titulo}}</h5>
-        </div>
-        <div class="card-footer">
-          <p class="text-muted text-wrap">
-            <a [routerLink]="['/autor', libro.autor.id]">
-              {{libro.autor.nombre}}
-            </a>
-          </p>
+      </div>
+    </div>
+
+    <div class="container" *ngIf="libros?.length > 0 && movil">
+      <div class="card-deck card-group d-inline-flex col-6 p-2 m-2"
+      *ngFor="let libro of libros">
+        <div class="card">
+          <div class="card-img-top text-center" *ngIf="libro?.idFoto">
+            <img (click)="abrirModal(libro)"
+            src="https://www.ebookelo.com/images/cover/{{ libro.idFoto }}.jpg"
+            alt="Portada de {{libro.titulo}}" class="img-thumbnail rounded"
+            style="cursor: pointer"
+            [ngStyle]="{'width.px': anchoImagen}"/>
+          </div>
+          <div class="card-img-top text-center" *ngIf="!libro?.idFoto">
+            <img (click)="abrirModal(libro)"
+            src="http://localhost:8080/images/no-portada.png"
+            alt="No portada" class="img-thumbnail rounded"
+            style="cursor: pointer"
+            [ngStyle]="{'width.px': anchoImagen}"/>
+          </div>
+          <div class="card-body text-wrap">
+            <h5 class="card-title" (click)="abrirModal(libro)"
+            style="cursor: pointer;">{{libro.titulo}}</h5>
+          </div>
+          <div class="card-footer">
+            <p class="text-muted text-wrap">
+              <a [routerLink]="['/autor', libro.autor.id]">
+                {{libro.autor.nombre}}
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

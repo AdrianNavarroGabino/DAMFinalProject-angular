@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PaginatorComponent implements OnInit, OnChanges {
   @Input() paginador: any;
   paginas: number[];
+  movil: boolean = false;
 
   desde: number;
   hasta: number;
@@ -18,6 +19,10 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if(window.outerWidth <= 425) {
+      this.movil = true;
+    }
+
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
       let idGenero = +params.get('idGenero');
